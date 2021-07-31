@@ -45,7 +45,7 @@ func diceVerbose(number, value int) ([]int, error) {
 		return []int{}, errors.New("invalid number of rolls")
 	}
 
-	result := make([]int, number)
+	result := make([]int, 0, number)
 
 	for i := 0; i < number; i++ {
 		die, err := dice(1, value)

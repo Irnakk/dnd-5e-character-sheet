@@ -8,6 +8,8 @@ import (
 )
 
 func iconHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("In iconHandler()")
+	defer fmt.Println("Out of iconHandler\n\n****************\n\n")
 	http.ServeFile(w, r, "../web/content/icon.png")
 }
 
@@ -23,7 +25,11 @@ func rootHandler(w http.ResponseWriter, req *http.Request) {
 	defer fmt.Print("Out of rootHandler\n\n****************\n\n")
 	printRequestInfo(req)
 
-	t, _ := template.ParseFiles("../web/index.html")
+	t, err := template.ParseFiles("../web/index.html")
+	if err != nil {
+		fmt.Printf("Error in parsing index,html: \t%v", err)
+		return
+	}
 	t.Execute(w, nil)
 }
 

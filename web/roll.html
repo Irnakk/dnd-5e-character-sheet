@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<script>
+    function infoOnClick() {
+        if (document.getElementById("info").style["color"] == "gray") {
+            document.getElementById("info").value="";
+            document.getElementById("info").style["color"] = "black";
+        }
+    }
+</script>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Roll</title>
+    <meta name="description" content="A page designed to test the dice rolling feature.">
+    <meta name="author" content="GIrnakk">
+
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+        body {
+            background-color: rgb(65, 135, 201);
+            display: flex;
+        }
+        p {
+            color:white;
+        }
+        form {
+            margin: auto;
+        }
+        input[type="submit"] {
+            background-color: teal;
+            color: white;
+            font-family: sans-serif;
+        }
+        /* input[type="text"] {
+            color: #808080;
+        } */
+    </style>
+</head>
+
+<body>
+    <form method="POST" action="/roll">
+        <input name="info" type="text" value="Input your text here..." id="info" onpointerenter="infoOnClick()" style="color: gray"/>
+        <input type="submit" value="Send data" id="submit"/>
+    </form>
+</body>
+
+</html>

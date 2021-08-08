@@ -40,9 +40,6 @@
             color: white;
             font-family: sans-serif;
         }
-        /* input[type="text"] {
-            color: #808080;
-        } */
     </style>
 </head>
 
@@ -50,6 +47,11 @@
     <form method="POST" action="/roll">
         <input name="info" type="text" value="Input your text here..." id="info" onpointerenter="infoOnClick()" style="color: gray"/>
         <input type="submit" value="Send data" id="submit"/>
+    </form>
+
+    <form method="POST" action="/roll">
+        <input name="die" type="text" id="die"/>
+        <input type="submit" value="Roll dice" id="submit_dice"/>
     </form>
 </body>
 

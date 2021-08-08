@@ -4,12 +4,13 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"os"
 	"time"
 )
 
 func iconHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("In iconHandler()")
-	defer fmt.Println("Out of iconHandler\n\n****************\n\n")
+	defer fmt.Print("Out of iconHandler()\n\n****************\n\n")
 	http.ServeFile(w, r, "../web/content/icon.png")
 }
 
@@ -22,12 +23,12 @@ func printRequestInfo(req *http.Request) {
 
 func rootHandler(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("In rootHandler()")
-	defer fmt.Print("Out of rootHandler\n\n****************\n\n")
+	defer fmt.Print("Out of rootHandler()\n\n****************\n\n")
 	printRequestInfo(req)
 
 	t, err := template.ParseFiles("../web/index.html")
 	if err != nil {
-		fmt.Printf("Error in parsing index,html: \t%v", err)
+		fmt.Printf("Error in parsing index.html:\t%v\n", err)
 		return
 	}
 	t.Execute(w, nil)
@@ -35,29 +36,49 @@ func rootHandler(w http.ResponseWriter, req *http.Request) {
 
 func rollHandler(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("In rollHandler()")
-	defer fmt.Print("Out of rollHandler\n\n****************\n\n")
+	defer fmt.Print("Out of rollHandler()\n\n****************\n\n")
 	printRequestInfo(req)
 
-	t, _ := template.ParseFiles("../web/roll.html")
+	t, err := template.ParseFiles("../web/roll.html")
+	if err != nil {
+		fmt.Printf("Error in parsing roll.html:\t%v\n", err)
+		return
+	}
 	t.Execute(w, nil)
 
 	switch req.Method {
 	case "GET":
-		//http.ServeFile(w, req, "../web/roll")
+		if err := req.ParseForm(); err != nil {
+			fmt.Printf("Error in parsing form in rollHandler():\t%v\n", err)
+			return
+		}
+
+		fmt.Printf("Successful GET; req.PostForm:\t%v\n", req.PostForm)
+		for key, value := range req.PostForm {
+			fmt.Printf("<%v>:\t%v\n", key, value)
+		}
 	case "POST":
 		if err := req.ParseForm(); err != nil {
-			fmt.Printf("Error in parsing form in rollHandler:\t%v", err)
+			fmt.Printf("Error in parsing form in rollHandler():\t%v\n", err)
 			return
 		}
 
 		fmt.Printf("Successful POST; req.PostForm:\t%v\n", req.PostForm)
-		info := req.FormValue("info")
-		fmt.Printf("Received <info>:\t%v\n", info)
+		for key, value := range req.PostForm {
+			fmt.Printf("<%v>:\t%v\n", key, value)
+		}
 	}
 }
 
 func main() {
-	fmt.Printf("Starting func main() at:\t%v\n", time.Now())
+	fmt.Println("Starting func main()...")
+	fmt.Printf("at:\t%v\n", time.Now())
+	wd, err := os.Getwd()
+	if err != nil {
+		fmt.Printf("Error in getting current working directory:\t%v\n", err)
+	} else {
+		fmt.Printf("from:\t%v\n", wd)
+	}
 
 	defer fmt.Printf("Finishing func main() at:\t%v\n", time.Now())
 

@@ -47,7 +47,9 @@
             httpRequest.onreadystatechange = function() {
                 // telling the request object what to do once the server replies
                 // processing the server response here
-                document.getElementById("roll").innerHTML = this.responseText;
+                const rollResult = JSON.parse(this.responseText);
+                const str = `Rolled ${rollResult.Number}d${rollResult.Value}: ${rollResult.Result}`;
+                document.getElementById("roll").innerHTML = str;
             }
 
             httpRequest.open("GET", "text.txt");
@@ -55,8 +57,8 @@
         }
     </script>
 
-    <div id="roll" style="margin: auto;">
-        <p>Here is going to be your roll!</p>
+    <div style="margin: auto;">
+        <p id="roll">Here is going to be your roll!</p>
 
         <!-- <form method="GET" action="/roll_get?d=20&n=1">
             <input type="submit" value="Roll 1d20" id="submit"/>

@@ -8,13 +8,13 @@ import (
 	"os"
 	"time"
 
-	"github.com/Irnakk/dnd-5e-character-sheet/src/dice"
+	"dnd-5e-character-sheet/src/dice"
 )
 
 func iconHandler(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("In iconHandler()")
 	defer fmt.Print("Out of iconHandler()\n\n****************\n\n")
-	http.ServeFile(w, req, "../web/content/icon.png")
+	http.ServeFile(w, req, "web/content/icon.png")
 }
 
 func printRequestInfo(req *http.Request) {
@@ -29,7 +29,7 @@ func rootHandler(w http.ResponseWriter, req *http.Request) {
 	defer fmt.Print("Out of rootHandler()\n\n****************\n\n")
 	printRequestInfo(req)
 
-	t, err := template.ParseFiles("../web/index.html")
+	t, err := template.ParseFiles("web/index.html")
 	if err != nil {
 		fmt.Printf("Error in parsing index.html:\t%v\n", err)
 		return
@@ -42,7 +42,7 @@ func rollHandler(w http.ResponseWriter, req *http.Request) {
 	defer fmt.Print("Out of rollHandler()\n\n****************\n\n")
 	printRequestInfo(req)
 
-	t, err := template.ParseFiles("../web/roll.html")
+	t, err := template.ParseFiles("web/roll.html")
 	if err != nil {
 		fmt.Printf("Error in parsing roll.html:\t%v\n", err)
 		return
@@ -78,7 +78,7 @@ func rollAjaxHandler(w http.ResponseWriter, req *http.Request) {
 	defer fmt.Print("Out of rollAjaxHandler()\n\n****************\n\n")
 	printRequestInfo(req)
 
-	t, err := template.ParseFiles("../web/roll_ajax.html")
+	t, err := template.ParseFiles("web/roll_ajax.html")
 	if err != nil {
 		fmt.Printf("Error in parsing roll_ajax.html:\t%v\n", err)
 		return
@@ -141,7 +141,7 @@ func testTextHandler(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "application/json") // Not really sure why this is required
 	w.Write(response_data)
 
-	//http.ServeFile(w, req, "../web/text.txt")
+	//http.ServeFile(w, req, "web/text.txt")
 
 }
 

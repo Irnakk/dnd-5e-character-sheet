@@ -1,3 +1,3 @@
-module github.com/Irnakk/dnd-5e-character-sheet
+module main.go
 
 go 1.16

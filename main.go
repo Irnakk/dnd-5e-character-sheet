@@ -48,70 +48,11 @@ func rollHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	t.Execute(w, nil)
-
-	switch req.Method {
-	case "GET":
-		if err := req.ParseForm(); err != nil {
-			fmt.Printf("Error in parsing form in rollHandler():\t%v\n", err)
-			return
-		}
-
-		fmt.Printf("Successful GET; req.PostForm:\t%v\n", req.PostForm)
-		for key, value := range req.PostForm {
-			fmt.Printf("<%v>:\t%v\n", key, value)
-		}
-	case "POST":
-		if err := req.ParseForm(); err != nil {
-			fmt.Printf("Error in parsing form in rollHandler():\t%v\n", err)
-			return
-		}
-
-		fmt.Printf("Successful POST; req.PostForm:\t%v\n", req.PostForm)
-		for key, value := range req.PostForm {
-			fmt.Printf("<%v>:\t%v\n", key, value)
-		}
-	}
 }
 
-func rollAjaxHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("In rollAjaxHandler()")
-	defer fmt.Print("Out of rollAjaxHandler()\n\n****************\n\n")
-	printRequestInfo(req)
-
-	t, err := template.ParseFiles("web/roll_ajax.html")
-	if err != nil {
-		fmt.Printf("Error in parsing roll_ajax.html:\t%v\n", err)
-		return
-	}
-	t.Execute(w, nil)
-
-	switch req.Method {
-	case "GET":
-		if err := req.ParseForm(); err != nil {
-			fmt.Printf("Error in parsing form in rollAjaxHandler():\t%v\n", err)
-			return
-		}
-
-		fmt.Printf("Successful GET; req.PostForm:\t%v\n", req.PostForm)
-		for key, value := range req.PostForm {
-			fmt.Printf("<%v>:\t%v\n", key, value)
-		}
-	case "POST":
-		if err := req.ParseForm(); err != nil {
-			fmt.Printf("Error in parsing form in rollAjaxHandler():\t%v\n", err)
-			return
-		}
-
-		fmt.Printf("Successful POST; req.PostForm:\t%v\n", req.PostForm)
-		for key, value := range req.PostForm {
-			fmt.Printf("<%v>:\t%v\n", key, value)
-		}
-	}
-}
-
-func testTextHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("In testTextHandler()")
-	defer fmt.Print("Out of testTextHandler()\n\n****************\n\n")
+func rollResultHandler(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("In rollResultHandler()")
+	defer fmt.Print("Out of rollResultHandler()\n\n****************\n\n")
 	printRequestInfo(req)
 
 	type rollResponse struct {
@@ -140,9 +81,6 @@ func testTextHandler(w http.ResponseWriter, req *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json") // Not really sure why this is required
 	w.Write(response_data)
-
-	//http.ServeFile(w, req, "web/text.txt")
-
 }
 
 func main() {
@@ -162,8 +100,7 @@ func main() {
 	http.HandleFunc("/roll", rollHandler)
 	http.HandleFunc("/favicon.ico", iconHandler)
 
-	http.HandleFunc("/roll_ajax", rollAjaxHandler)
-	http.HandleFunc("/text.txt", testTextHandler)
+	http.HandleFunc("/roll-result", rollResultHandler)
 
 	fmt.Print("Listening on port 8080.\n\n")
 	http.ListenAndServe(":8080", nil)

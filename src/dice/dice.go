@@ -6,6 +6,7 @@ import (
 )
 
 var (
+	// Starts with a lower-case letter because this struct is not exported
 	dice_types = map[int]struct{}{
 		4:   {},
 		6:   {},
@@ -17,6 +18,7 @@ var (
 	}
 )
 
+// Starts with an upper-case letter because this func is exported
 func DiceRoll(number, value int) (int, error) {
 	if _, found := dice_types[value]; !found {
 		return 0, errors.New("no such die")
@@ -36,6 +38,7 @@ func DiceRoll(number, value int) (int, error) {
 	return sum, nil
 }
 
+// Starts with an upper-case letter because this func is exported
 func DiceRollVerbose(number, value int) ([]int, error) {
 	if _, found := dice_types[value]; !found {
 		return []int{}, errors.New("no such die")

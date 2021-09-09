@@ -2,21 +2,12 @@
 
 <html lang="en">
 
-<script>
-    function infoOnClick() {
-        if (document.getElementById("info").style["color"] == "gray") {
-            document.getElementById("info").value="";
-            document.getElementById("info").style["color"] = "black";
-        }
-    }
-</script>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Roll</title>
-    <meta name="description" content="A page designed to test the dice rolling feature.">
+    <meta name="description" content="A clone of the roll page; testing GET here.">
     <meta name="author" content="GIrnakk">
 
     <style>
@@ -31,28 +22,46 @@
         }
         p {
             color:white;
-        }
-        form {
-            margin: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
         input[type="submit"] {
             background-color: teal;
+            display: block;
             color: white;
             font-family: sans-serif;
+            height: 64px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 128px;
         }
     </style>
 </head>
 
 <body>
-    <form method="POST" action="/roll">
-        <input name="info" type="text" value="Input your text here..." id="info" onpointerenter="infoOnClick()" style="color: gray"/>
-        <input type="submit" value="Send data" id="submit"/>
-    </form>
+    <script>
+        function loadData() {
+            const httpRequest = new XMLHttpRequest(); // No idea why "const" here; could be also "var"
+            
+            httpRequest.onreadystatechange = function() {
+                // telling the request object what to do once the server replies
+                // processing the server response here
+                const rollResult = JSON.parse(this.responseText);
+                const str = `Rolled ${rollResult.Number}d${rollResult.Value}: ${rollResult.Result}`;
+                document.getElementById("roll").innerHTML = str;
+            }
 
-    <form method="POST" action="/roll">
-        <input name="die" type="text" id="die"/>
-        <input type="submit" value="Roll dice" id="submit_dice"/>
-    </form>
+            httpRequest.open("GET", "roll-result");
+            httpRequest.send();
+        }
+    </script>
+
+    <div style="margin: auto;">
+        <p id="roll">Here is going to be your roll!</p>
+
+        <button type="button" onclick="loadData()">Make a 1d20 roll</button>
+    </div>
 </body>
 
 </html>

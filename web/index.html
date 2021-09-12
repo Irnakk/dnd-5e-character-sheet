@@ -10,35 +10,19 @@
     <meta name="description" content="Basic index web page.">
     <meta name="author" content="GIrnakk">
 
-    <style>
-        html, body {
-            height: 100%;
-            width: 100%;
-            margin: 0;
-        }
-        body {
-            background-color: rgb(65, 135, 201);
-            display: flex;
-        }
-        p {
-            color:white;
-            font-family: sans-serif;
-        }
-        form {
-            margin: auto;
-        }
-        input[type="submit"] {
-            background-color: teal;
-            color: white;
-            font-family: sans-serif;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 
 <body>
-    <form method="GET" action="/roll">
-        <input type="submit" value="Go to the Roll page">
-    </form>
+    <div>
+        <form method="GET" action="/roll">
+            <input type="submit" value="Go to the Roll page">
+        </form>
+
+        <form method="GET" action="/stats">
+            <input type="submit" value="Go to the Stats page">
+        </form>
+    </div>
 </body>
 
 </html>

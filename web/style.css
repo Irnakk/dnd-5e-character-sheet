@@ -1,0 +1,39 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+body {
+    background-color: rgb(65, 135, 201);
+    display: flex;
+}
+
+p {
+    color: white;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input[type="button"] {
+    background-color: teal;
+    display: block;
+    color: white;
+    font-family: sans-serif;
+    height: 64px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 128px;
+}
+
+input[type="submit"] {
+    background-color: teal;
+    color: white;
+    font-family: sans-serif;
+}
+
+div {
+    margin: auto;
+}

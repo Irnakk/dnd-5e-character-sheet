@@ -73,7 +73,7 @@ func rollResultHandler(w http.ResponseWriter, req *http.Request) {
 		Result: roll_result,
 	}
 
-	response_data, err := json.Marshal(response_obj)
+	response_data, err := json.MarshalIndent(response_obj, "", "	")
 	if err != nil {
 		fmt.Printf("Error in marshalling response_object:\t%v\n", err)
 		return

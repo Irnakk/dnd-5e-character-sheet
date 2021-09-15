@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Roll</title>
+    <meta name="description" content="A page to test stats rolling.">
+    <meta name="author" content="GIrnakk">
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+
+<body>
+    <script>
+        function loadStats() {
+            const httpRequest = new XMLHttpRequest(); // No idea why "const" here; could be also "var"
+
+            httpRequest.onreadystatechange = function () {
+                // telling the request object what to do once the server replies
+                // processing the server response here
+                const rollResult = JSON.parse(this.responseText);
+                document.getElementById("str").innerHTML = rollResult.Strength;
+                document.getElementById("dex").innerHTML = rollResult.Dexterity;
+                document.getElementById("con").innerHTML = rollResult.Constitution;
+                document.getElementById("int").innerHTML = rollResult.Intelligence;
+                document.getElementById("wis").innerHTML = rollResult.Wisdom;
+                document.getElementById("cha").innerHTML = rollResult.Charisma;
+            }
+
+            httpRequest.open("GET", "roll-stats");
+            httpRequest.send();
+        }
+    </script>
+
+    <div>
+        <p>Stats</p>
+        <div>
+            <p>Strength: </p>
+            <p id="str">10</p>
+        </div>
+        <div>
+            <p>Dexterity: </p>
+            <p id="dex">10</p>
+        </div>
+        <div>
+            <p>Constitution: </p>
+            <p id="con">10</p>
+        </div>
+        <div>
+            <p>Intelligence: </p>
+            <p id="int">10</p>
+        </div>
+        <div>
+            <p>Wisdom: </p>
+            <p id="wis">10</p>
+        </div>
+        <div>
+            <p>Charisma: </p>
+            <p id="cha">10</p>
+        </div>
+    </div>
+
+    <button type="button" onclick="loadStats()">Roll new stats</button>
+</body>
+
+</html>

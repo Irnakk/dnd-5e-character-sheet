@@ -7,45 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Roll</title>
-    <meta name="description" content="A clone of the roll page; testing GET here.">
+    <meta name="description" content="A page to test single rolls.">
     <meta name="author" content="GIrnakk">
 
-    <style>
-        html,
-        body {
-            height: 100%;
-            width: 100%;
-            margin: 0;
-        }
-
-        body {
-            background-color: rgb(65, 135, 201);
-            display: flex;
-        }
-
-        p {
-            color: white;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        input[type="submit"] {
-            background-color: teal;
-            display: block;
-            color: white;
-            font-family: sans-serif;
-            height: 64px;
-            margin-left: auto;
-            margin-right: auto;
-            width: 128px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 
 <body>
     <script>
-        function loadData() {
+        function loadData(num, val) {
             const httpRequest = new XMLHttpRequest(); // No idea why "const" here; could be also "var"
 
             httpRequest.onreadystatechange = function () {
@@ -56,15 +26,24 @@
                 document.getElementById("roll").innerHTML = str;
             }
 
-            httpRequest.open("GET", "roll-result");
-            httpRequest.send();
+            const rollInfo = new Object();
+            rollInfo.number = num;
+            rollInfo.value = val;
+
+            rollStr = JSON.stringify(rollInfo);
+
+            httpRequest.open("POST", "roll-result");
+            httpRequest.setRequestHeader("Content-Type", "application/json");
+            httpRequest.send(rollStr);
         }
     </script>
 
-    <div style="margin: auto;">
+    <div>
         <p id="roll">Here is going to be your roll!</p>
 
-        <button type="button" onclick="loadData()">Make a 1d20 roll</button>
+        <button type="button" onclick="loadData(1, 20)">Make a 1d20 roll</button>
+        <button type="button" onclick="loadData(1, 4)">Make a 1d4 roll</button>
+        <button type="button" onclick="loadData(4, 6)">Make a 4d6 roll</button>
     </div>
 </body>
 

@@ -5,9 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>6 Stats page</title>
-    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="/css/style1.css">
 </head>
 <body>
+    <script src="/scripts/statsField.js"></script>
     <div class = "md">
        <table>
            <tr>
@@ -21,7 +22,11 @@
 
                 <th></th>
 
+                <th></th>
+
                 <th>Бонус</th>
+
+                <th></th>
 
                 <td rowspan="8" id = "mod"> </td>
                 <th >Модификатор</th>
@@ -31,71 +36,95 @@
                 <th>Сила</th>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "str_sum"></textarea>
                 </td>
 
                 <td>=</td>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "str_base"></textarea>
                 </td>
 
                 <td>+</td>
 
-                <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                <td id = "str_bonus_min">
+                    <button type="button" onclick="statDec('str_bonus')">-</button>
                 </td>
 
-
                 <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "str_bonus">2</textarea>
+                </td>
+
+                <td id="str_bonus_plus">
+                    <button type="button" onclick="statInc('str_bonus')">+</button>
+                </td>
+                
+                <td>
+                    <textarea rows="1" cols="2" class="txta" id = "str_mod"></textarea>
                 </td>
             </tr>   
 
-           <tr id = "agil">
+           <tr id = "dex">
                 <th>Ловкость</th>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "dex_sum"></textarea>
                 </td>
 
                 <td>=</td>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "dex_base"></textarea>
                 </td>
 
                 <td>+</td>
 
-                <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                <td id="dex_bonus_min">
+                    <button type="button" onclick="statDec('dex_bonus')">-</button>
                 </td>
+
                 <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "dex_bonus">2</textarea>
+                </td>
+
+                <td id="dex_bonus_plus">
+                    <button type="button" onclick="statInc('dex_bonus')">+</button>
+                </td>
+
+                <td>
+                    <textarea rows="1" cols="2" class="txta" id = "dex_mod"></textarea>
                 </td>
             </tr> 
 
-            <tr id = "hab">
+            <tr id = "con">
                 <th>Телосложение</th>
             
                 <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "con_sum"></textarea>
                 </td>
             
                 <td>=</td>
             
                 <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "con_base"></textarea>
                 </td>
             
                 <td>+</td>
             
-                <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                <td id="con_bonus_min">
+                    <button type="button" onclick="statDec('con_bonus')">-</button>
                 </td>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "con_bonus">2</textarea>
+                </td>
+
+                <td id="con_bonus_plus">
+                    <button type="button" onclick="statInc('con_bonus')">+</button>
+                </td>
+
+                <td>
+                    <textarea rows="1" cols="2" class="txta" id = "con_mod"></textarea>
                 </td>
             </tr>
 
@@ -103,23 +132,31 @@
                 <th>Интеллект</th>
             
                 <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "int_sum"></textarea>
                 </td>
             
                 <td>=</td>
             
                 <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "int_base"></textarea>
                 </td>
             
                 <td>+</td>
             
-                <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                <td id="int_bonus_min">
+                    <button type="button" onclick="statDec('int_bonus')">-</button>
                 </td>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "int_bonus">-2</textarea>
+                </td>
+
+                <td id="int_bonus_plus">
+                    <button type="button" onclick="statInc('int_bonus')">+</button>
+                </td>
+
+                <td>
+                    <textarea rows="1" cols="2" class="txta" id = "int_mod"></textarea>
                 </td>
             </tr>
 
@@ -127,50 +164,69 @@
                 <th>Мудрость</th>
             
                 <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "wis_sum"></textarea>
                 </td>
             
                 <td>=</td>
             
                 <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "wis_base"></textarea>
                 </td>
             
                 <td>+</td>
             
-                <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                <td id="wis_bonus_min">
+                    <button type="button" onclick="staDec('wis_bonus')">-</button>
                 </td>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "wis_bonus">0</textarea>
+                </td>
+
+                <td id="con_bonus_plus">
+                    <button type="button" onclick="statInc('wis_bonus')">+</button>
+                </td>
+
+                <td>
+                    <textarea rows="1" cols="2" class="txta" id = "wis_mod"></textarea>
                 </td>
             </tr>
 
-            <tr id = "char">    
+            <tr id = "cha">    
                 <th>Харизма</th>
             
                 <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "cha_sum"></textarea>
                 </td>
             
                 <td>=</td>
             
                 <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "cha_base"></textarea>
                 </td>
             
                 <td>+</td>
             
-                <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                <td id="cha_bonus_min">
+                    <button type="button" onclick="statDec('cha_bonus')">-</button>
                 </td>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "cha_bonus">2</textarea>
+                </td>
+
+                <td id="cha_bonus_plus">
+                    <button type="button" onclick="statInc('cha_bonus')">+</button>
+                </td>
+
+                <td>
+                    <textarea rows="1" cols="2" class="txta" id = "cha_mod"></textarea>
                 </td>
             </tr>
        </table>
+    </div>
+    <div>
+        <button type="button" onclick="loadStats()">Roll new stats</button>
     </div>
 </body>
 </html>

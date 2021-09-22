@@ -2,7 +2,9 @@ package dice
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
+	"math"
 )
 
 type RollInfo struct {
@@ -88,4 +90,12 @@ func RollStats() (StatsInfo, error) {
 	resultStats.Charisma = roll
 
 	return resultStats, nil
+}
+
+func Modifier(stat int) (int, error) {
+	if stat < 1 {
+		return 0, errors.New("stat cannot be less than 1")
+	}
+
+	return int(math.Floor((float64(stat) - 10.) / 2.)), nil
 }

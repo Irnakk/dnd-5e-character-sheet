@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/style1.css">
 </head>
 <body>
+    <script src="/scripts/st_field.js"></script>
     <div class = "md">
        <table>
            <tr>
@@ -40,7 +41,7 @@
                 <td>=</td>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "str_base"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "str_base">-2</textarea>
                 </td>
 
                 <td>+</td>
@@ -50,9 +51,9 @@
                 </td>
 
                 <td>
-                    <input type="checkbox" class="cb" id="str_st"></input>
+                    <input type="checkbox" class="cb" id="str_st" onchange="bonusUpdate('str_st','str_bonus')"></input>
                 </td>
-            </tr>   
+            </tr>  
 
            <tr id = "dex">
 
@@ -75,7 +76,7 @@
                 </td>
 
                 <td>
-                    <input type="checkbox" class="cb" id="dex_st"></input>
+                    <input type="checkbox" class="cb" id="dex_st" onchange="bonusUpdate('dex_st','dex_bonus')"></input>
                 </td>
             </tr> 
 
@@ -90,7 +91,7 @@
                 <td>=</td>
             
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "con_base"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "con_base">2</textarea>
                 </td>
             
                 <td>+</td>
@@ -100,7 +101,7 @@
                 </td>
 
                 <td>
-                    <input type="checkbox" class="cb" id="con_st"></input>
+                    <input type="checkbox" class="cb" id="con_st" onchange="bonusUpdate('con_st','con_bonus')"></input>
                 </td>
             </tr>
 
@@ -125,7 +126,7 @@
                 </td>
 
                 <td>
-                    <input type="checkbox" class="cb" id="int_st"></input>
+                    <input type="checkbox" class="cb" id="int_st" onchange="bonusUpdate('int_st','int_bonus')"></input>
                 </td>
                 
             </tr>
@@ -152,7 +153,7 @@
 
 
                 <td>
-                    <input type="checkbox" class="cb" id="wis_st"></input>
+                    <input type="checkbox" class="cb" id="wis_st" onchange="bonusUpdate('wis_st','wis_bonus')"></input>
                 </td>
             </tr>
 
@@ -178,7 +179,7 @@
 
 
                 <td>
-                    <input type="checkbox" class="cb" id="cha_st"></input>
+                    <input type="checkbox" class="cb" id="cha_st" onchange="bonusUpdate('cha_st','cha_bonus')"></input>
                 </td>
             </tr>
        </table>

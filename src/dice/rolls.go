@@ -5,21 +5,14 @@ import (
 	"errors"
 	"fmt"
 	"math"
+
+	"dnd-5e-character-sheet/src/csdata"
 )
 
 type RollInfo struct {
 	Number int
 	Value  int
 	Result int
-}
-
-type StatsInfo struct {
-	Strength     int
-	Dexterity    int
-	Constitution int
-	Intelligence int
-	Wisdom       int
-	Charisma     int
 }
 
 func MarshalRollSingle(number, value int) ([]byte, error) {
@@ -44,48 +37,48 @@ func MarshalRollSingle(number, value int) ([]byte, error) {
 	return marshaledResult, nil
 }
 
-func RollStats() (StatsInfo, error) {
-	resultStats := StatsInfo{}
+func RollStats() (csdata.SixStats, error) {
+	resultStats := csdata.SixStats{}
 
 	roll, err := DiceRoll(4, 6)
 	if err != nil {
 		fmt.Printf("Error in rolling 4d6:\t%v\n", err)
-		return StatsInfo{}, err
+		return csdata.SixStats{}, err
 	}
 	resultStats.Strength = roll
 
 	roll, err = DiceRoll(4, 6)
 	if err != nil {
 		fmt.Printf("Error in rolling 4d6:\t%v\n", err)
-		return StatsInfo{}, err
+		return csdata.SixStats{}, err
 	}
 	resultStats.Dexterity = roll
 
 	roll, err = DiceRoll(4, 6)
 	if err != nil {
 		fmt.Printf("Error in rolling 4d6:\t%v\n", err)
-		return StatsInfo{}, err
+		return csdata.SixStats{}, err
 	}
 	resultStats.Constitution = roll
 
 	roll, err = DiceRoll(4, 6)
 	if err != nil {
 		fmt.Printf("Error in rolling 4d6:\t%v\n", err)
-		return StatsInfo{}, err
+		return csdata.SixStats{}, err
 	}
 	resultStats.Intelligence = roll
 
 	roll, err = DiceRoll(4, 6)
 	if err != nil {
 		fmt.Printf("Error in rolling 4d6:\t%v\n", err)
-		return StatsInfo{}, err
+		return csdata.SixStats{}, err
 	}
 	resultStats.Wisdom = roll
 
 	roll, err = DiceRoll(4, 6)
 	if err != nil {
 		fmt.Printf("Error in rolling 4d6:\t%v\n", err)
-		return StatsInfo{}, err
+		return csdata.SixStats{}, err
 	}
 	resultStats.Charisma = roll
 

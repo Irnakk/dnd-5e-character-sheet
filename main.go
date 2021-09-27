@@ -6,10 +6,26 @@ import (
 	"os"
 	"time"
 
+	"dnd-5e-character-sheet/src/csdata"
+	"dnd-5e-character-sheet/src/dice"
 	"dnd-5e-character-sheet/src/handlers"
 )
 
+func testWrite() error {
+	sheet := csdata.CharacterSheet{}
+	sheet.ProficiencyBonus = 2
+	sheet.StatsBase, _ = dice.RollStats()
+
+	return sheet.WriteFile("test.txt")
+}
+
 func main() {
+	// err := testWrite()
+	// if err != nil {
+	// 	fmt.Printf("Error in writing file:\t%v\n", err)
+	// 	return
+	// }
+
 	fmt.Println("Starting func main()...")
 	fmt.Printf("at:\t%v\n", time.Now())
 	wd, err := os.Getwd()

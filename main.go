@@ -31,6 +31,7 @@ func main() {
 	http.Handle("/scripts/", http.StripPrefix("/scripts/", http.FileServer(http.Dir("web"))))
 	http.HandleFunc("/roll-result", handlers.RollResultHandler)
 	http.HandleFunc("/roll-stats", handlers.RollStatsHandler)
+	http.HandleFunc("/saving-throws", handlers.SavingThrowsHandler)
 
 	fmt.Print("Listening on port 8080.\n\n")
 	http.ListenAndServe(":8080", nil)

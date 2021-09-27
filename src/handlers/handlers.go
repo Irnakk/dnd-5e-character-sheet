@@ -121,3 +121,15 @@ func SixStatsHandler(w http.ResponseWriter, req *http.Request) {
 	}
 	t.Execute(w, nil)
 }
+func SavingThrowsHandler(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("In SavingThrowsHandler()")
+	defer fmt.Print("Out of SavingThrowsHandler()\n\n****************\n\n")
+	printRequestInfo(req)
+
+	t, err := template.ParseFiles("web/saving_throws.html")
+	if err != nil {
+		fmt.Printf("Error in parsing saving_throws.html:\t%v\n", err)
+		return
+	}
+	t.Execute(w, nil)
+}

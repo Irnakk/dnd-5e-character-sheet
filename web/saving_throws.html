@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>6 Stats page</title>
+    <title>Saving Throws</title>
     <link rel="stylesheet" href="/css/style1.css">
 </head>
 <body>
-    <script src="/scripts/statsField.js"></script>
     <div class = "md">
        <table>
            <tr>
@@ -22,11 +21,7 @@
 
                 <th></th>
 
-                <th></th>
-
                 <th>Бонус</th>
-
-                <th></th>
 
                 <th rowspan="8" id="mod"></th>
 
@@ -50,18 +45,10 @@
 
                 <td>+</td>
 
-                <td id = "str_bonus_min">
-                    <button type="button" onclick="statDec('str_bonus')">-</button>
-                </td>
-
                 <td>
                     <textarea rows="1" cols="2" class="txta" id = "str_bonus">2</textarea>
                 </td>
 
-                <td id="str_bonus_plus">
-                    <button type="button" onclick="statInc('str_bonus')">+</button>
-                </td>
-                
                 <td>
                     <input type="checkbox" class="cb" id="str_st"></input>
                 </td>
@@ -83,16 +70,8 @@
 
                 <td>+</td>
 
-                <td id="dex_bonus_min">
-                    <button type="button" onclick="statDec('dex_bonus')">-</button>
-                </td>
-
                 <td>
                     <textarea rows="1" cols="2" class="txta" id = "dex_bonus">2</textarea>
-                </td>
-
-                <td id="dex_bonus_plus">
-                    <button type="button" onclick="statInc('dex_bonus')">+</button>
                 </td>
 
                 <td>
@@ -115,17 +94,9 @@
                 </td>
             
                 <td>+</td>
-            
-                <td id="con_bonus_min">
-                    <button type="button" onclick="statDec('con_bonus')">-</button>
-                </td>
 
                 <td>
                     <textarea rows="1" cols="2" class="txta" id = "con_bonus">2</textarea>
-                </td>
-
-                <td id="con_bonus_plus">
-                    <button type="button" onclick="statInc('con_bonus')">+</button>
                 </td>
 
                 <td>
@@ -148,19 +119,11 @@
                 </td>
             
                 <td>+</td>
-            
-                <td id="int_bonus_min">
-                    <button type="button" onclick="statDec('int_bonus')">-</button>
-                </td>
 
                 <td>
                     <textarea rows="1" cols="2" class="txta" id = "int_bonus">-2</textarea>
                 </td>
 
-                <td id="int_bonus_plus">
-                    <button type="button" onclick="statInc('int_bonus')">+</button>
-                </td>
-                
                 <td>
                     <input type="checkbox" class="cb" id="int_st"></input>
                 </td>
@@ -182,18 +145,11 @@
                 </td>
             
                 <td>+</td>
-            
-                <td id="wis_bonus_min">
-                    <button type="button" onclick="statDec('wis_bonus')">-</button>
-                </td>
 
                 <td>
                     <textarea rows="1" cols="2" class="txta" id = "wis_bonus">0</textarea>
                 </td>
 
-                <td id="con_bonus_plus">
-                    <button type="button" onclick="statInc('wis_bonus')">+</button>
-                </td>
 
                 <td>
                     <input type="checkbox" class="cb" id="wis_st"></input>
@@ -215,27 +171,17 @@
                 </td>
             
                 <td>+</td>
-            
-                <td id="cha_bonus_min">
-                    <button type="button" onclick="statDec('cha_bonus')">-</button>
-                </td>
 
                 <td>
                     <textarea rows="1" cols="2" class="txta" id = "cha_bonus">2</textarea>
                 </td>
 
-                <td id="cha_bonus_plus">
-                    <button type="button" onclick="statInc('cha_bonus')">+</button>
-                </td>
 
                 <td>
                     <input type="checkbox" class="cb" id="cha_st"></input>
                 </td>
             </tr>
        </table>
-    </div>
-    <div>
-        <button type="button" onclick="loadStats()">Roll new stats</button>
     </div>
 </body>
 </html>

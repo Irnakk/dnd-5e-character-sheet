@@ -16,3 +16,11 @@ body {
   resize: none;
   text-align: center;
 }
+.cb {
+  width: 20px;
+  height: 20px;
+}
+th,
+td {
+  padding-right: 20px;
+}

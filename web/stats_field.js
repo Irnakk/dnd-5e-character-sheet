@@ -4,15 +4,18 @@ function loadStats() {
     httpRequest.onreadystatechange = function () {
         // telling the request object what to do once the server replies
         // processing the server response here
-        const rollResult = JSON.parse(this.responseText);
-        document.getElementById("str_base").innerHTML = rollResult.Strength;
-        document.getElementById("dex_base").innerHTML = rollResult.Dexterity;
-        document.getElementById("con_base").innerHTML = rollResult.Constitution;
-        document.getElementById("int_base").innerHTML = rollResult.Intelligence;
-        document.getElementById("wis_base").innerHTML = rollResult.Wisdom;
-        document.getElementById("cha_base").innerHTML = rollResult.Charisma;
 
-        updateStats();
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+            const rollResult = JSON.parse(this.responseText);
+            document.getElementById("str_base").innerHTML = rollResult.Strength;
+            document.getElementById("dex_base").innerHTML = rollResult.Dexterity;
+            document.getElementById("con_base").innerHTML = rollResult.Constitution;
+            document.getElementById("int_base").innerHTML = rollResult.Intelligence;
+            document.getElementById("wis_base").innerHTML = rollResult.Wisdom;
+            document.getElementById("cha_base").innerHTML = rollResult.Charisma;
+
+            updateStats();
+        }
     }
 
     httpRequest.open("GET", "roll-stats");
@@ -97,4 +100,70 @@ function countModifiers(stat) {
     } else {
         document.getElementById("cha_mod").innerHTML = '+' + chaMod.toString();
     }
+}
+
+function readStats(identifier) {
+    const httpRequest = new XMLHttpRequest();
+
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+            const loadedStats = JSON.parse(this.responseText);
+            document.getElementById("str_base").innerHTML = loadedStats.StatsBase.Strength;
+            document.getElementById("dex_base").innerHTML = loadedStats.StatsBase.Dexterity;
+            document.getElementById("con_base").innerHTML = loadedStats.StatsBase.Constitution;
+            document.getElementById("int_base").innerHTML = loadedStats.StatsBase.Intelligence;
+            document.getElementById("wis_base").innerHTML = loadedStats.StatsBase.Wisdom;
+            document.getElementById("cha_base").innerHTML = loadedStats.StatsBase.Charisma;
+
+            document.getElementById("str_bonus").innerHTML = loadedStats.StatsBonuses.Strength;
+            document.getElementById("dex_bonus").innerHTML = loadedStats.StatsBonuses.Dexterity;
+            document.getElementById("con_bonus").innerHTML = loadedStats.StatsBonuses.Constitution;
+            document.getElementById("int_bonus").innerHTML = loadedStats.StatsBonuses.Intelligence;
+            document.getElementById("wis_bonus").innerHTML = loadedStats.StatsBonuses.Wisdom;
+            document.getElementById("cha_bonus").innerHTML = loadedStats.StatsBonuses.Charisma;
+
+            updateStats();
+        }
+    }
+
+    const reply = {Identifier: identifier}
+
+    httpRequest.open("POST", "read-sheet"); // Does not work wit GET
+    httpRequest.setRequestHeader("Content-Type", "application/json"); // It works without it, though
+    httpRequest.send(JSON.stringify(reply));
+}
+
+function writeStats(identifier) {
+    const httpRequest = new XMLHttpRequest();
+
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+            alert("Saved stats to file");
+        }
+    }
+
+    const reply = {
+        Identifier: identifier,
+        StatsBase: {
+            Strength:       parseInt(document.getElementById("str_base").innerHTML),
+            Dexterity:      parseInt(document.getElementById("dex_base").innerHTML),
+            Constitution:   parseInt(document.getElementById("con_base").innerHTML),
+            Intelligence:   parseInt(document.getElementById("int_base").innerHTML),
+            Wisdom:         parseInt(document.getElementById("wis_base").innerHTML),
+            Charisma:       parseInt(document.getElementById("cha_base").innerHTML)
+        },
+        StatsBonuses: {
+            Strength:       parseInt(document.getElementById("str_bonus").innerHTML),
+            Dexterity:      parseInt(document.getElementById("dex_bonus").innerHTML),
+            Constitution:   parseInt(document.getElementById("con_bonus").innerHTML),
+            Intelligence:   parseInt(document.getElementById("int_bonus").innerHTML),
+            Wisdom:         parseInt(document.getElementById("wis_bonus").innerHTML),
+            Charisma:       parseInt(document.getElementById("cha_bonus").innerHTML)
+        }
+    }
+
+    httpRequest.open("POST", "write-sheet"); // Does not work wit GET
+    httpRequest.setRequestHeader("Content-Type", "application/json"); // It works without it, though
+    httpRequest.send(JSON.stringify(reply));
+    console.log(JSON.stringify(reply))
 }

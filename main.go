@@ -6,10 +6,26 @@ import (
 	"os"
 	"time"
 
+	"dnd-5e-character-sheet/src/csdata"
+	"dnd-5e-character-sheet/src/dice"
 	"dnd-5e-character-sheet/src/handlers"
 )
 
+func testWrite() error {
+	sheet := csdata.CharacterSheet{}
+	sheet.ProficiencyBonus = 2
+	sheet.StatsBase, _ = dice.RollStats()
+
+	return sheet.WriteFile("test.txt")
+}
+
 func main() {
+	// err := testWrite()
+	// if err != nil {
+	// 	fmt.Printf("Error in writing file:\t%v\n", err)
+	// 	return
+	// }
+
 	fmt.Println("Starting func main()...")
 	fmt.Printf("at:\t%v\n", time.Now())
 	wd, err := os.Getwd()
@@ -30,8 +46,11 @@ func main() {
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("web")))) // Not entirely sure why it is written like this
 	http.Handle("/scripts/", http.StripPrefix("/scripts/", http.FileServer(http.Dir("web"))))
 	http.HandleFunc("/roll-result", handlers.RollResultHandler)
-	http.HandleFunc("/roll-stats", handlers.RollStatsHandler)
 	http.HandleFunc("/saving-throws", handlers.SavingThrowsHandler)
+
+	http.HandleFunc("/roll-stats", handlers.RollStatsHandler)
+	http.HandleFunc("/read-sheet", handlers.ReadSheetHandler)
+	http.HandleFunc("/write-sheet", handlers.WriteSheetHandler)
 
 	fmt.Print("Listening on port 8080.\n\n")
 	http.ListenAndServe(":8080", nil)

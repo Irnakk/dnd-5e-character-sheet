@@ -2,9 +2,7 @@ package dice
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
-	"math"
 
 	"dnd-5e-character-sheet/src/csdata"
 )
@@ -38,57 +36,26 @@ func MarshalRollSingle(number, value int) ([]byte, error) {
 }
 
 func RollStats() (csdata.SixStats, error) {
-	resultStats := csdata.SixStats{}
+	rolls := make([]int, 6)
 
-	roll, err := DiceRoll(4, 6)
-	if err != nil {
-		fmt.Printf("Error in rolling 4d6:\t%v\n", err)
-		return csdata.SixStats{}, err
-	}
-	resultStats.Strength = roll
+	for i := 0; i < 6; i++ {
+		roll, err := DiceRoll(4, 6)
+		if err != nil {
+			fmt.Printf("Error in rolling 4d6 on iteration %v:\t%v\n", i, err)
+			return csdata.SixStats{}, err
+		}
 
-	roll, err = DiceRoll(4, 6)
-	if err != nil {
-		fmt.Printf("Error in rolling 4d6:\t%v\n", err)
-		return csdata.SixStats{}, err
+		rolls[i] = roll
 	}
-	resultStats.Dexterity = roll
 
-	roll, err = DiceRoll(4, 6)
-	if err != nil {
-		fmt.Printf("Error in rolling 4d6:\t%v\n", err)
-		return csdata.SixStats{}, err
+	resultStats := csdata.SixStats{
+		Strength:     rolls[0],
+		Dexterity:    rolls[1],
+		Constitution: rolls[2],
+		Intelligence: rolls[3],
+		Wisdom:       rolls[4],
+		Charisma:     rolls[5],
 	}
-	resultStats.Constitution = roll
-
-	roll, err = DiceRoll(4, 6)
-	if err != nil {
-		fmt.Printf("Error in rolling 4d6:\t%v\n", err)
-		return csdata.SixStats{}, err
-	}
-	resultStats.Intelligence = roll
-
-	roll, err = DiceRoll(4, 6)
-	if err != nil {
-		fmt.Printf("Error in rolling 4d6:\t%v\n", err)
-		return csdata.SixStats{}, err
-	}
-	resultStats.Wisdom = roll
-
-	roll, err = DiceRoll(4, 6)
-	if err != nil {
-		fmt.Printf("Error in rolling 4d6:\t%v\n", err)
-		return csdata.SixStats{}, err
-	}
-	resultStats.Charisma = roll
 
 	return resultStats, nil
-}
-
-func Modifier(stat int) (int, error) {
-	if stat < 1 {
-		return 0, errors.New("stat cannot be less than 1")
-	}
-
-	return int(math.Floor((float64(stat) - 10.) / 2.)), nil
 }

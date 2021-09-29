@@ -1,0 +1,51 @@
+{
+	"ProficiencyBonus": 2,
+	"StatsBase": {
+		"Strength": -1,
+		"Dexterity": -2,
+		"Constitution": -3,
+		"Intelligence": -4,
+		"Wisdom": -5,
+		"Charisma": -6
+	},
+	"StatsBonuses": {
+		"Strength": 0,
+		"Dexterity": 0,
+		"Constitution": 0,
+		"Intelligence": 0,
+		"Wisdom": 0,
+		"Charisma": 0
+	},
+	"StatsSum": {
+		"Strength": 0,
+		"Dexterity": 0,
+		"Constitution": 0,
+		"Intelligence": 0,
+		"Wisdom": 0,
+		"Charisma": 0
+	},
+	"StatsModifiers": {
+		"Strength": 0,
+		"Dexterity": 0,
+		"Constitution": 0,
+		"Intelligence": 0,
+		"Wisdom": 0,
+		"Charisma": 0
+	},
+	"STModifiers": {
+		"Strength": 0,
+		"Dexterity": 0,
+		"Constitution": 0,
+		"Intelligence": 0,
+		"Wisdom": 0,
+		"Charisma": 0
+	},
+	"STProficiency": {
+		"Strength": false,
+		"Dexterity": false,
+		"Constitution": false,
+		"Intelligence": false,
+		"Wisdom": false,
+		"Charisma": false
+	}
+}

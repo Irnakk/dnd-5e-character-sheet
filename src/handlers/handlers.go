@@ -4,8 +4,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"net/http"
+	"os"
 
+	// "dnd-5e-character-sheet/src/csdata"
 	"dnd-5e-character-sheet/src/dice"
 )
 
@@ -109,10 +112,13 @@ func RollStatsHandler(w http.ResponseWriter, req *http.Request) {
 	w.Header().Set("Content-Type", "application/json") // Not really sure why this is required
 	w.Write(response_data)
 }
+
 func SixStatsHandler(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("In SixStatsHandler()")
 	defer fmt.Print("Out of SixStatsHandler()\n\n****************\n\n")
 	printRequestInfo(req)
+
+	fmt.Printf("sheet_id:\t%v\n", req.FormValue("sheet_id")) // sheet_id is the name of the textbox
 
 	t, err := template.ParseFiles("web/6stats.html")
 	if err != nil {
@@ -121,6 +127,7 @@ func SixStatsHandler(w http.ResponseWriter, req *http.Request) {
 	}
 	t.Execute(w, nil)
 }
+
 func SavingThrowsHandler(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("In SavingThrowsHandler()")
 	defer fmt.Print("Out of SavingThrowsHandler()\n\n****************\n\n")
@@ -132,4 +139,46 @@ func SavingThrowsHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	t.Execute(w, nil)
+}
+
+func ReadSheetHandler(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("In ReadSheetHandler()")
+	defer fmt.Print("Out of ReadSheetHandler()\n\n****************\n\n")
+	printRequestInfo(req)
+
+	var requestReply struct {
+		Identifier string
+	}
+
+	err := json.NewDecoder(req.Body).Decode(&requestReply)
+	if err != nil {
+		fmt.Printf("Error in decoding sheet id:\t%v\n", err)
+		return
+	}
+
+	fmt.Printf("Parsed id:\t%v\n", requestReply.Identifier)
+
+	jsonFile, err := os.Open(requestReply.Identifier + ".json")
+	if err != nil {
+		fmt.Printf("Error in opening file:\t%v\n", err)
+		return
+	}
+	defer jsonFile.Close()
+
+	byteValue, err := ioutil.ReadAll(jsonFile)
+	if err != nil {
+		fmt.Printf("Error in reading file:\t%v\n", err)
+		return
+	}
+
+	// var sheet csdata.CharacterSheet
+
+	// err = json.Unmarshal(byteValue, &sheet)
+	// if err != nil {
+	// 	fmt.Printf("Error in unmarshaling byteValue:\t%v\n", err)
+	// 	return
+	// }
+
+	w.Header().Set("Content-Type", "application/json") // Not really sure why this is required
+	w.Write(byteValue)
 }

@@ -46,8 +46,10 @@ func main() {
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("web")))) // Not entirely sure why it is written like this
 	http.Handle("/scripts/", http.StripPrefix("/scripts/", http.FileServer(http.Dir("web"))))
 	http.HandleFunc("/roll-result", handlers.RollResultHandler)
-	http.HandleFunc("/roll-stats", handlers.RollStatsHandler)
 	http.HandleFunc("/saving-throws", handlers.SavingThrowsHandler)
+
+	http.HandleFunc("/roll-stats", handlers.RollStatsHandler)
+	http.HandleFunc("/read-sheet", handlers.ReadSheetHandler)
 
 	fmt.Print("Listening on port 8080.\n\n")
 	http.ListenAndServe(":8080", nil)

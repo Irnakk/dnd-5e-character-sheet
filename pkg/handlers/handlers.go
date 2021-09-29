@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"os"
 
-	// "dnd-5e-character-sheet/src/csdata"
 	"dnd-5e-character-sheet/pkg/csdata"
 	"dnd-5e-character-sheet/pkg/dice"
 )

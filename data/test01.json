@@ -1,5 +1,6 @@
 {
-	"ProficiencyBonus": 0,
+	"Level": 0,
+	"ProficiencyBonus": 2,
 	"StatsBase": {
 		"Strength": 13,
 		"Dexterity": 8,

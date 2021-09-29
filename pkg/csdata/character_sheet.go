@@ -8,6 +8,7 @@ import (
 )
 
 type CharacterSheet struct {
+	Level            int
 	ProficiencyBonus int
 
 	StatsBase      SixStats
@@ -86,6 +87,7 @@ type SkillsCheck struct {
 
 func (sheet *CharacterSheet) Update() {
 	// Add ProficiencyBonus count from level
+	sheet.countProficiencyBonus()
 
 	sheet.countStatsSum()
 
@@ -96,6 +98,20 @@ func (sheet *CharacterSheet) Update() {
 	sheet.countSkillsModifiers()
 
 	sheet.PassiveWisdom = 10 + sheet.SkillsModifiers.Perception
+}
+
+func (sheet *CharacterSheet) countProficiencyBonus() {
+	if sheet.Level < 5 {
+		sheet.ProficiencyBonus = 2
+	} else if sheet.Level < 9 {
+		sheet.ProficiencyBonus = 3
+	} else if sheet.Level < 13 {
+		sheet.ProficiencyBonus = 4
+	} else if sheet.Level < 17 {
+		sheet.ProficiencyBonus = 5
+	} else {
+		sheet.ProficiencyBonus = 6
+	}
 }
 
 func (sheet *CharacterSheet) countStatsSum() {

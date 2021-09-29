@@ -2,9 +2,7 @@ package dice
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
-	"math"
 
 	"dnd-5e-character-sheet/src/csdata"
 )
@@ -60,12 +58,4 @@ func RollStats() (csdata.SixStats, error) {
 	}
 
 	return resultStats, nil
-}
-
-func Modifier(stat int) (int, error) {
-	if stat < 1 {
-		return 0, errors.New("stat cannot be less than 1")
-	}
-
-	return int(math.Floor((float64(stat) - 10.) / 2.)), nil
 }

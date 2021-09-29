@@ -9,6 +9,7 @@ import (
 	"os"
 
 	// "dnd-5e-character-sheet/src/csdata"
+	"dnd-5e-character-sheet/src/csdata"
 	"dnd-5e-character-sheet/src/dice"
 )
 
@@ -171,14 +172,39 @@ func ReadSheetHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	// var sheet csdata.CharacterSheet
-
-	// err = json.Unmarshal(byteValue, &sheet)
-	// if err != nil {
-	// 	fmt.Printf("Error in unmarshaling byteValue:\t%v\n", err)
-	// 	return
-	// }
-
 	w.Header().Set("Content-Type", "application/json") // Not really sure why this is required
 	w.Write(byteValue)
+}
+
+func WriteSheetHandler(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("In WriteSheetHandler()")
+	defer fmt.Print("Out of WriteSheetHandler()\n\n****************\n\n")
+	printRequestInfo(req)
+
+	var requestReply struct {
+		Identifier   string
+		StatsBase    csdata.SixStats
+		StatsBonuses csdata.SixStats
+	}
+
+	err := json.NewDecoder(req.Body).Decode(&requestReply)
+	if err != nil {
+		fmt.Printf("Error in decoding sheet info:\t%v\n", err)
+		return
+	}
+
+	fmt.Printf("~~~~~~~~~~~~~~~~\nrequestReply:\n%v\n~~~~~~~~~~~~~~~~\n", requestReply)
+
+	fmt.Printf("Parsed id:\t%v\n", requestReply.Identifier)
+
+	var sheet csdata.CharacterSheet
+
+	sheet.StatsBase = requestReply.StatsBase
+	sheet.StatsBonuses = requestReply.StatsBonuses
+	sheet.Update()
+	err = sheet.WriteFile(requestReply.Identifier)
+	if err != nil {
+		fmt.Printf("Error in writing sheet to file:\t%v\n", err)
+		return
+	}
 }

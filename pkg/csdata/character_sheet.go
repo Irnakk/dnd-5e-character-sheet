@@ -256,7 +256,7 @@ func (sheet *CharacterSheet) WriteFile(name string) error {
 		return err
 	}
 
-	file, err := os.Create(name + ".json")
+	file, err := os.Create("data/" + name + ".json")
 	if err != nil {
 		fmt.Printf("Error in creating file:\t%v\n", err)
 		return err

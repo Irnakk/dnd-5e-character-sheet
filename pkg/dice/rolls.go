@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"dnd-5e-character-sheet/src/csdata"
+	"dnd-5e-character-sheet/pkg/csdata"
 )
 
 type RollInfo struct {

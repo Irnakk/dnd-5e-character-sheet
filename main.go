@@ -6,18 +6,8 @@ import (
 	"os"
 	"time"
 
-	"dnd-5e-character-sheet/src/csdata"
-	"dnd-5e-character-sheet/src/dice"
-	"dnd-5e-character-sheet/src/handlers"
+	"dnd-5e-character-sheet/pkg/handlers"
 )
-
-func testWrite() error {
-	sheet := csdata.CharacterSheet{}
-	sheet.ProficiencyBonus = 2
-	sheet.StatsBase, _ = dice.RollStats()
-
-	return sheet.WriteFile("test.txt")
-}
 
 func main() {
 	// err := testWrite()
@@ -41,7 +31,6 @@ func main() {
 	http.HandleFunc("/", handlers.RootHandler)
 	http.HandleFunc("/roll", handlers.RollHandler)
 	http.HandleFunc("/stats", handlers.StatsHandler)
-	http.HandleFunc("/6stats", handlers.SixStatsHandler)
 	http.HandleFunc("/favicon.ico", handlers.IconHandler)
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("web")))) // Not entirely sure why it is written like this
 	http.Handle("/scripts/", http.StripPrefix("/scripts/", http.FileServer(http.Dir("web"))))

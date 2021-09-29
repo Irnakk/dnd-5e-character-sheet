@@ -1,0 +1,92 @@
+{
+	"ProficiencyBonus": 0,
+	"StatsBase": {
+		"Strength": 13,
+		"Dexterity": 8,
+		"Constitution": 19,
+		"Intelligence": 11,
+		"Wisdom": 16,
+		"Charisma": 16
+	},
+	"StatsBonuses": {
+		"Strength": -1,
+		"Dexterity": 0,
+		"Constitution": 1,
+		"Intelligence": 2,
+		"Wisdom": 1,
+		"Charisma": -4
+	},
+	"StatsSum": {
+		"Strength": 12,
+		"Dexterity": 8,
+		"Constitution": 20,
+		"Intelligence": 13,
+		"Wisdom": 17,
+		"Charisma": 12
+	},
+	"StatsModifiers": {
+		"Strength": 1,
+		"Dexterity": -1,
+		"Constitution": 5,
+		"Intelligence": 1,
+		"Wisdom": 3,
+		"Charisma": 1
+	},
+	"STModifiers": {
+		"Strength": 1,
+		"Dexterity": -1,
+		"Constitution": 5,
+		"Intelligence": 1,
+		"Wisdom": 3,
+		"Charisma": 1
+	},
+	"STProficiency": {
+		"Strength": false,
+		"Dexterity": false,
+		"Constitution": false,
+		"Intelligence": false,
+		"Wisdom": false,
+		"Charisma": false
+	},
+	"SkillsModifiers": {
+		"Acrobatics": -1,
+		"AnimalHandling": 3,
+		"Arcana": 1,
+		"Athletics": 1,
+		"Deception": 1,
+		"History": 1,
+		"Insight": 3,
+		"Intimidation": 1,
+		"Investigation": 1,
+		"Medicine": 3,
+		"Nature": 1,
+		"Perception": 3,
+		"Performance": 1,
+		"Persuasion": 1,
+		"Religion": 1,
+		"SleightOfHand": -1,
+		"Stealth": -1,
+		"Survival": 3
+	},
+	"SkillsProficiency": {
+		"Acrobatics": false,
+		"AnimalHandling": false,
+		"Arcana": false,
+		"Athletics": false,
+		"Deception": false,
+		"History": false,
+		"Insight": false,
+		"Intimidation": false,
+		"Investigation": false,
+		"Medicine": false,
+		"Nature": false,
+		"Perception": false,
+		"Performance": false,
+		"Persuasion": false,
+		"Religion": false,
+		"SleightOfHand": false,
+		"Stealth": false,
+		"Survival": false
+	},
+	"PassiveWisdom": 13
+}

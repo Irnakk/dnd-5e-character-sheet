@@ -9,8 +9,8 @@ import (
 	"os"
 
 	// "dnd-5e-character-sheet/src/csdata"
-	"dnd-5e-character-sheet/src/csdata"
-	"dnd-5e-character-sheet/src/dice"
+	"dnd-5e-character-sheet/pkg/csdata"
+	"dnd-5e-character-sheet/pkg/dice"
 )
 
 func printRequestInfo(req *http.Request) {
@@ -114,21 +114,6 @@ func RollStatsHandler(w http.ResponseWriter, req *http.Request) {
 	w.Write(response_data)
 }
 
-func SixStatsHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("In SixStatsHandler()")
-	defer fmt.Print("Out of SixStatsHandler()\n\n****************\n\n")
-	printRequestInfo(req)
-
-	fmt.Printf("sheet_id:\t%v\n", req.FormValue("sheet_id")) // sheet_id is the name of the textbox
-
-	t, err := template.ParseFiles("web/6stats.html")
-	if err != nil {
-		fmt.Printf("Error in parsing 6stats.html:\t%v\n", err)
-		return
-	}
-	t.Execute(w, nil)
-}
-
 func SavingThrowsHandler(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("In SavingThrowsHandler()")
 	defer fmt.Print("Out of SavingThrowsHandler()\n\n****************\n\n")
@@ -159,7 +144,7 @@ func ReadSheetHandler(w http.ResponseWriter, req *http.Request) {
 
 	fmt.Printf("Parsed id:\t%v\n", requestReply.Identifier)
 
-	jsonFile, err := os.Open(requestReply.Identifier + ".json")
+	jsonFile, err := os.Open("data/" + requestReply.Identifier + ".json")
 	if err != nil {
 		fmt.Printf("Error in opening file:\t%v\n", err)
 		return

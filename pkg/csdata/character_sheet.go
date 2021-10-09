@@ -1,10 +1,13 @@
 package csdata
 
 import (
+	"database/sql"
 	"encoding/json"
 	"fmt"
 	"math"
 	"os"
+
+	_ "github.com/lib/pq"
 )
 
 type CharacterSheet struct {
@@ -289,6 +292,52 @@ func (sheet *CharacterSheet) WriteFile(name string) error {
 		fmt.Printf("Error in closing file:\t%v\n", err)
 		return err
 	}
+
+	return nil
+}
+
+func (sheet *CharacterSheet) ReadFromDB(id int) error {
+	const (
+		host     = "localhost"
+		port     = 5432
+		user     = "postgres"
+		password = "123321"
+		dbname   = "character_sheets"
+	)
+
+	psqlconn := fmt.Sprintf("host= %s port= %d user= %s password= %s dbname= %s sslmode=disable", host, port, user, password, dbname)
+
+	db, err := sql.Open("postgres", psqlconn)
+	if err != nil {
+		fmt.Printf("Error in opening DB:\t%v\n", err)
+		return err
+	}
+	defer db.Close()
+
+	query := `SELECT "level",
+	"str_base", "dex_base", "con_base",
+	"int_base", "wis_base", "cha_base",
+	"str_bonus", "dex_bonus", "con_bonus",
+	"int_bonus", "wis_bonus", "cha_bonus",
+	"st_str_prof", "st_dex_prof", "st_con_prof",
+	"st_int_prof", "st_wis_prof", "st_cha_prof"
+	FROM "sheets"
+	WHERE "sheet_id" = 1`
+	result := db.QueryRow(query)
+	err = result.Scan(
+		&sheet.Level,
+		&sheet.StatsBase.Strength, &sheet.StatsBase.Dexterity, &sheet.StatsBase.Constitution,
+		&sheet.StatsBase.Intelligence, &sheet.StatsBase.Wisdom, &sheet.StatsBase.Charisma,
+		&sheet.StatsBonuses.Strength, &sheet.StatsBonuses.Dexterity, &sheet.StatsBonuses.Constitution,
+		&sheet.StatsBonuses.Intelligence, &sheet.StatsBonuses.Wisdom, &sheet.StatsBonuses.Charisma,
+		&sheet.STProficiency.Strength, &sheet.STProficiency.Dexterity, &sheet.STProficiency.Constitution,
+		&sheet.STProficiency.Intelligence, &sheet.STProficiency.Wisdom, &sheet.STProficiency.Charisma,
+	)
+	if err != nil {
+		fmt.Printf("Error in scanning:\t%v\n", err)
+		return err
+	}
+	fmt.Printf("Query result:\n%v\n", sheet)
 
 	return nil
 }

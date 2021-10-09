@@ -27,6 +27,15 @@ func main() {
 
 	defer fmt.Printf("Finishing func main() at:\t%v\n", time.Now())
 
+	// var sheet csdata.CharacterSheet
+	// err = sheet.ReadFromDB(1)
+	// if err != nil {
+	// 	fmt.Printf("Error in reading from DB:\t%v\n", err)
+	// 	return
+	// }
+	// sheet.Update()
+	// fmt.Printf("the sheet after Update():\n%v\n", sheet)
+
 	fmt.Println("Binding handler functions...")
 	http.HandleFunc("/", handlers.RootHandler)
 	http.HandleFunc("/roll", handlers.RollHandler)

@@ -1,4 +1,6 @@
 function loadStats() {
+    // Perform an AJAX-request to the server in order for it to roll stats;
+    // then receive the rolled stats and write them into corresponding fields
     const httpRequest = new XMLHttpRequest(); // No idea why "const" here; could be also "var"
 
     httpRequest.onreadystatechange = function () {

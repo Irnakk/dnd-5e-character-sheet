@@ -35,23 +35,23 @@
                 <th>Сила</th>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "str_sum"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "str_sum">+0</textarea>
                 </td>
 
                 <td>=</td>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "str_base">-2</textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "str_base">+0</textarea>
                 </td>
 
                 <td>+</td>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "str_bonus">2</textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "str_bonus">+0</textarea>
                 </td>
 
                 <td>
-                    <input type="checkbox" class="cb" id="str_st" onchange="bonusUpdate('str_st','str_bonus')"></input>
+                    <input type="checkbox" class="cb" id="str_st" onchange="updateStats()"></input>
                 </td>
             </tr>  
 
@@ -60,23 +60,23 @@
                 <th>Ловкость</th>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "dex_sum"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "dex_sum">+0</textarea>
                 </td>
 
                 <td>=</td>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "dex_base"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "dex_base">+0</textarea>
                 </td>
 
                 <td>+</td>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "dex_bonus">2</textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "dex_bonus">+0</textarea>
                 </td>
 
                 <td>
-                    <input type="checkbox" class="cb" id="dex_st" onchange="bonusUpdate('dex_st','dex_bonus')"></input>
+                    <input type="checkbox" class="cb" id="dex_st" onchange="updateStats()"></input>
                 </td>
             </tr> 
 
@@ -85,23 +85,23 @@
                 <th>Телосложение</th>
             
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "con_sum"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "con_sum">+0</textarea>
                 </td>
             
                 <td>=</td>
             
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "con_base">2</textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "con_base">+0</textarea>
                 </td>
             
                 <td>+</td>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "con_bonus">2</textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "con_bonus">+0</textarea>
                 </td>
 
                 <td>
-                    <input type="checkbox" class="cb" id="con_st" onchange="bonusUpdate('con_st','con_bonus')"></input>
+                    <input type="checkbox" class="cb" id="con_st" onchange="updateStats()"></input>
                 </td>
             </tr>
 
@@ -110,23 +110,23 @@
                 <th>Интеллект</th>
             
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "int_sum"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "int_sum">+0</textarea>
                 </td>
             
                 <td>=</td>
             
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "int_base"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "int_base">+0</textarea>
                 </td>
             
                 <td>+</td>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "int_bonus">-2</textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "int_bonus">+0</textarea>
                 </td>
 
                 <td>
-                    <input type="checkbox" class="cb" id="int_st" onchange="bonusUpdate('int_st','int_bonus')"></input>
+                    <input type="checkbox" class="cb" id="int_st" onchange="updateStats()"></input>
                 </td>
                 
             </tr>
@@ -136,24 +136,24 @@
                 <th>Мудрость</th>
             
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "wis_sum"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "wis_sum">+0</textarea>
                 </td>
             
                 <td>=</td>
             
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "wis_base"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "wis_base">+0</textarea>
                 </td>
             
                 <td>+</td>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "wis_bonus">0</textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "wis_bonus">+0</textarea>
                 </td>
 
 
                 <td>
-                    <input type="checkbox" class="cb" id="wis_st" onchange="bonusUpdate('wis_st','wis_bonus')"></input>
+                    <input type="checkbox" class="cb" id="wis_st" onchange="updateStats()"></input>
                 </td>
             </tr>
 
@@ -162,27 +162,33 @@
                 <th>Харизма</th>
             
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "cha_sum"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "cha_sum">+0</textarea>
                 </td>
             
                 <td>=</td>
             
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "cha_base"></textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "cha_base">+0</textarea>
                 </td>
             
                 <td>+</td>
 
                 <td>
-                    <textarea rows="1" cols="2" class="txta" id = "cha_bonus">2</textarea>
+                    <textarea rows="1" cols="2" class="txta" id = "cha_bonus">+0</textarea>
                 </td>
 
 
                 <td>
-                    <input type="checkbox" class="cb" id="cha_st" onchange="bonusUpdate('cha_st','cha_bonus')"></input>
+                    <input type="checkbox" class="cb" id="cha_st" onchange="updateStats()"></input>
                 </td>
             </tr>
        </table>
+    </div>
+
+    <div>
+        <button type="button" onclick="readST('st1')">readST('st1')</button>
+        <button type="button" onclick="readST('st2')">readST('st2')</button>
+        <button type="button" onclick="readST('st3')">readST('st3')</button>
     </div>
 </body>
 </html>

@@ -44,9 +44,9 @@
 	"STProficiency": {
 		"Strength": false,
 		"Dexterity": false,
-		"Constitution": false,
+		"Constitution": true,
 		"Intelligence": false,
 		"Wisdom": false,
-		"Charisma": false
+		"Charisma": true
 	}
 }

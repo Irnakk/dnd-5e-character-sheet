@@ -2,20 +2,20 @@
 	"Level": 0,
 	"ProficiencyBonus": 2,
 	"StatsBase": {
-		"Strength": 22,
-		"Dexterity": 8,
-		"Constitution": 11,
-		"Intelligence": 15,
-		"Wisdom": 19,
-		"Charisma": 15
+		"Strength": -1,
+		"Dexterity": -2,
+		"Constitution": -3,
+		"Intelligence": -4,
+		"Wisdom": -5,
+		"Charisma": -6
 	},
 	"StatsBonuses": {
-		"Strength": -2,
-		"Dexterity": -1,
+		"Strength": 0,
+		"Dexterity": 0,
 		"Constitution": 0,
-		"Intelligence": 3,
-		"Wisdom": 3,
-		"Charisma": 4
+		"Intelligence": 0,
+		"Wisdom": 0,
+		"Charisma": 0
 	},
 	"StatsSum": {
 		"Strength": 0,
@@ -34,19 +34,19 @@
 		"Charisma": 0
 	},
 	"STModifiers": {
-		"Strength": 0,
+		"Strength": 2,
 		"Dexterity": 0,
-		"Constitution": 0,
-		"Intelligence": 0,
-		"Wisdom": 0,
-		"Charisma": 0
+		"Constitution": 4,
+		"Intelligence": -3,
+		"Wisdom": -2,
+		"Charisma": 2
 	},
 	"STProficiency": {
 		"Strength": false,
-		"Dexterity": true,
-		"Constitution": false,
+		"Dexterity": false,
+		"Constitution": true,
 		"Intelligence": false,
-		"Wisdom": true,
-		"Charisma": false
+		"Wisdom": false,
+		"Charisma": true
 	}
 }

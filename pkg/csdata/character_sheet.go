@@ -297,6 +297,13 @@ func (sheet *CharacterSheet) WriteFile(name string) error {
 	return nil
 }
 
+// ReadFromDB performs an SQL query that returns:
+// level,
+// six stats - base,
+// six stats - bonuses,
+// saving throws proficiency
+// for the given DB ID,
+// and saves the data into the Character Sheet.
 func (sheet *CharacterSheet) ReadFromDB(id int) error {
 	file_content, err := ioutil.ReadFile("C:/d5cs/db_login")
 	if err != nil {
@@ -322,7 +329,9 @@ func (sheet *CharacterSheet) ReadFromDB(id int) error {
 	"st_int_prof", "st_wis_prof", "st_cha_prof"
 	FROM "sheets"
 	WHERE "sheet_id" = %d`, id)
+
 	result := db.QueryRow(query)
+
 	err = result.Scan(
 		&sheet.Level,
 		&sheet.StatsBase.Strength, &sheet.StatsBase.Dexterity, &sheet.StatsBase.Constitution,

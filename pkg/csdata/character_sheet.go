@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"math"
 	"os"
 
@@ -297,15 +298,13 @@ func (sheet *CharacterSheet) WriteFile(name string) error {
 }
 
 func (sheet *CharacterSheet) ReadFromDB(id int) error {
-	const (
-		host     = "localhost"
-		port     = 5432
-		user     = "postgres"
-		password = "123321"
-		dbname   = "character_sheets"
-	)
+	file_content, err := ioutil.ReadFile("C:/d5cs/db_login")
+	if err != nil {
+		fmt.Printf("Error in opening login file:\t%v\n", err)
+		return err
+	}
 
-	psqlconn := fmt.Sprintf("host= %s port= %d user= %s password= %s dbname= %s sslmode=disable", host, port, user, password, dbname)
+	psqlconn := string(file_content)
 
 	db, err := sql.Open("postgres", psqlconn)
 	if err != nil {
@@ -314,7 +313,7 @@ func (sheet *CharacterSheet) ReadFromDB(id int) error {
 	}
 	defer db.Close()
 
-	query := `SELECT "level",
+	query := fmt.Sprintf(`SELECT "current_level",
 	"str_base", "dex_base", "con_base",
 	"int_base", "wis_base", "cha_base",
 	"str_bonus", "dex_bonus", "con_bonus",
@@ -322,7 +321,7 @@ func (sheet *CharacterSheet) ReadFromDB(id int) error {
 	"st_str_prof", "st_dex_prof", "st_con_prof",
 	"st_int_prof", "st_wis_prof", "st_cha_prof"
 	FROM "sheets"
-	WHERE "sheet_id" = 1`
+	WHERE "sheet_id" = %d`, id)
 	result := db.QueryRow(query)
 	err = result.Scan(
 		&sheet.Level,

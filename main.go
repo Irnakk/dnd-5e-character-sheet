@@ -36,10 +36,17 @@ func main() {
 	http.Handle("/scripts/", http.StripPrefix("/scripts/", http.FileServer(http.Dir("web"))))
 	http.HandleFunc("/roll-result", handlers.RollResultHandler)
 	http.HandleFunc("/saving-throws", handlers.SavingThrowsHandler)
+	http.HandleFunc("/skills", handlers.SkillsHandler)
+	http.HandleFunc("/register", handlers.RegisterHandler)
+	http.HandleFunc("/login", handlers.LoginHandler)
 
 	http.HandleFunc("/roll-stats", handlers.RollStatsHandler)
 	http.HandleFunc("/read-sheet", handlers.ReadSheetHandler)
 	http.HandleFunc("/write-sheet", handlers.WriteSheetHandler)
+
+	// TODO:
+	// http.HandleFunc("/reg-form", handlers.WriteSheetHandler)
+	// http.HandleFunc("/login-form", handlers.WriteSheetHandler)
 
 	fmt.Print("Listening on port 8080.\n\n")
 	http.ListenAndServe(":8080", nil)

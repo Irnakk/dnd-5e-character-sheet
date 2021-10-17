@@ -126,6 +126,45 @@ func SavingThrowsHandler(w http.ResponseWriter, req *http.Request) {
 	t.Execute(w, nil)
 }
 
+func RegisterHandler(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("In RegisterHandler()")
+	defer fmt.Print("Out of RegisterHandler()\n\n****************\n\n")
+	printRequestInfo(req)
+
+	t, err := template.ParseFiles("web/register.html")
+	if err != nil {
+		fmt.Printf("Error in parsing register.html:\t%v\n", err)
+		return
+	}
+	t.Execute(w, nil)
+}
+
+func LoginHandler(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("In LoginHandler()")
+	defer fmt.Print("Out of LoginHandler()\n\n****************\n\n")
+	printRequestInfo(req)
+
+	t, err := template.ParseFiles("web/login.html")
+	if err != nil {
+		fmt.Printf("Error in parsing login.html:\t%v\n", err)
+		return
+	}
+	t.Execute(w, nil)
+}
+
+func SkillsHandler(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("In SkillsHandler()")
+	defer fmt.Print("Out of SkillsHandler()\n\n****************\n\n")
+	printRequestInfo(req)
+
+	t, err := template.ParseFiles("web/skills.html")
+	if err != nil {
+		fmt.Printf("Error in parsing skills.html:\t%v\n", err)
+		return
+	}
+	t.Execute(w, nil)
+}
+
 func ReadSheetHandler(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("In ReadSheetHandler()")
 	defer fmt.Print("Out of ReadSheetHandler()\n\n****************\n\n")

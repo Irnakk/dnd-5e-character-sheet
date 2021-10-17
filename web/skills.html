@@ -1,13 +1,502 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href=""/>
+    <meta hisrset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" arctent="IE=edge">
+    <meta name="viewport" arctent="width=device-width, initial-scale=1.0">
     <title>Skills Page</title>
+    <link rel="stylesheet" href="style1.css">
 </head>
 <body>
-    
+    <div class="md_skill">
+        <table>
+            <tr>
+                <th></th>
+
+                <th></th>
+
+                <th></th>
+
+                <th>База</th>
+
+                <th></th>
+
+                <th>Бонус</th>
+
+                <th rowspan="20" id="mod"></th>
+
+                <th>Скилл</th>
+
+            </tr>
+
+            <tr id="acr">
+
+                <th>Акробатика</th>
+
+                <td>
+                    <input type="text" value="+0" class="txta" id="acr_sum"></input>
+                </td>
+
+                <td>=</td>
+
+                <td>
+                    <input type="text" value="+0" class="txta" id="acr_base"></input>
+                </td>
+
+                <td>+</td>
+
+                <td>
+                    <input type="text" value="+0" class="txta" id="acr_bonus"></input>
+                </td>
+
+                <td>
+                    <input type="checkbox" class="cb" id="acr_st" onhisnge="updateStats()"></input>
+                </td>
+            </tr>
+
+            <tr id="anHand">
+
+                <th>Animal Handling</th>
+
+                <td>
+                    <input type="text" value="+0" class="txta" id="anHand_sum"></input>
+                </td>
+
+                <td>=</td>
+
+                <td>
+                    <input type="text" value="+0" class="txta" id="anHand_base"></input>
+                </td>
+
+                <td>+</td>
+
+                <td>
+                    <input type="text" value="+0" class="txta" id="anHand_bonus"></input>
+                </td>
+
+                <td>
+                    <input type="checkbox" class="cb" id="anHand_st" onhisnge="updateStats()"></input>
+                </td>
+            </tr>
+
+            <tr id="arc">
+
+                <th>Arcana</th>
+
+                <td>
+                    <input type="text" value="+0" class="txta" id="arc_sum"></input>
+                </td>
+
+                <td>=</td>
+
+                <td>
+                    <input type="text" value="+0" class="txta" id="arc_base"></input>
+                </td>
+
+                <td>+</td>
+
+                <td>
+                    <input type="text" value="+0" class="txta" id="arc_bonus"></input>
+                </td>
+
+                <td>
+                    <input type="checkbox" class="cb" id="arc_st" onhisnge="updateStats()"></input>
+                </td>
+            </tr>
+
+            <tr id="athl">
+
+                <th>Athletic</th>
+
+                <td>
+                    <input type="text" value="+0" class="txta" id="athl_sum"></input>
+                </td>
+
+                <td>=</td>
+
+                <td>
+                    <input type="text" value="+0" class="txta" id="athl_base"></input>
+                </td>
+
+                <td>+</td>
+
+                <td>
+                    <input type="text" value="+0" class="txta" id="athl_bonus"></input>
+                </td>
+
+                <td>
+                    <input type="checkbox" class="cb" id="athl_st" onhisnge="updateStats()"></input>
+                </td>
+
+            </tr>
+
+            <tr id="dece">
+
+                <th>Deception</th>
+
+                <td>
+                    <input type="text" value="+0" class="txta" id="dece_sum"></input>
+                </td>
+
+                <td>=</td>
+
+                <td>
+                    <input type="text" value="+0" class="txta" id="dece_base"></input>
+                </td>
+
+                <td>+</td>
+
+                <td>
+                    <input type="text" value="+0" class="txta" id="dece_bonus"></input>
+                </td>
+
+
+                <td>
+                    <input type="checkbox" class="cb" id="dece_st" onhisnge="updateStats()"></input>
+                </td>
+            </tr>
+
+            <tr id="his">
+
+                <th>History</th>
+
+                <td>
+                    <input type="text" value="+0" class="txta" id="his_sum"></input>
+                </td>
+
+                <td>=</td>
+
+                <td>
+                    <input type="text" value="+0" class="txta" id="his_base"></input>
+                </td>
+
+                <td>+</td>
+
+                <td>
+                    <input type="text" value="+0" class="txta" id="his_bonus"></input>
+                </td>
+
+
+                <td>
+                    <input type="checkbox" class="cb" id="his_st" onhisnge="updateStats()"></input>
+                </td>
+            </tr>
+
+            <tr id="ins">
+            
+                <th>Insight</th>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="ins_sum"></input>
+                </td>
+            
+                <td>=</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="ins_base"></input>
+                </td>
+            
+                <td>+</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="ins_bonus"></input>
+                </td>
+            
+            
+                <td>
+                    <input type="checkbox" class="cb" id="ins_st" onhisnge="updateStats()"></input>
+                </td>
+            </tr>
+
+            <tr id="inti">
+            
+                <th>Intimidation</th>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="inti_sum"></input>
+                </td>
+            
+                <td>=</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="inti_base"></input>
+                </td>
+            
+                <td>+</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="inti_bonus"></input>
+                </td>
+            
+            
+                <td>
+                    <input type="checkbox" class="cb" id="inti_st" onhisnge="updateStats()"></input>
+                </td>
+            </tr>
+
+            <tr id="invs">
+            
+                <th>Invistigation</th>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="invs_sum"></input>
+                </td>
+            
+                <td>=</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="invs_base"></input>
+                </td>
+            
+                <td>+</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="invs_bonus"></input>
+                </td>
+            
+            
+                <td>
+                    <input type="checkbox" class="cb" id="invs_st" onhisnge="updateStats()"></input>
+                </td>
+            </tr>
+
+            <tr id="med">
+            
+                <th>Medicine</th>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="med_sum"></input>
+                </td>
+            
+                <td>=</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="med_base"></input>
+                </td>
+            
+                <td>+</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="med_bonus"></input>
+                </td>
+            
+            
+                <td>
+                    <input type="checkbox" class="cb" id="med_st" onhisnge="updateStats()"></input>
+                </td>
+            </tr>
+
+            <tr id="nat">
+            
+                <th>Nature</th>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="nat_sum"></input>
+                </td>
+            
+                <td>=</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="nat_base"></input>
+                </td>
+            
+                <td>+</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="nat_bonus"></input>
+                </td>
+            
+            
+                <td>
+                    <input type="checkbox" class="cb" id="nat_st" onhisnge="updateStats()"></input>
+                </td>
+            </tr>
+
+            <tr id="perce">
+            
+                <th>Perception</th>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="perce_sum"></input>
+                </td>
+            
+                <td>=</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="perce_base"></input>
+                </td>
+            
+                <td>+</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="perce_bonus"></input>
+                </td>
+            
+            
+                <td>
+                    <input type="checkbox" class="cb" id="perce_st" onhisnge="updateStats()"></input>
+                </td>
+            </tr>
+
+            <tr id="perf">
+            
+                <th>Performans</th>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="perf_sum"></input>
+                </td>
+            
+                <td>=</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="perf_base"></input>
+                </td>
+            
+                <td>+</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="perf_bonus"></input>
+                </td>
+            
+            
+                <td>
+                    <input type="checkbox" class="cb" id="perf_st" onhisnge="updateStats()"></input>
+                </td>
+            </tr>
+
+            <tr id="pers">
+            
+                <th>Persuation</th>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="pers_sum"></input>
+                </td>
+            
+                <td>=</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="pers_base"></input>
+                </td>
+            
+                <td>+</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="pers_bonus"></input>
+                </td>
+            
+            
+                <td>
+                    <input type="checkbox" class="cb" id="pers_st" onhisnge="updateStats()"></input>
+                </td>
+            </tr>
+
+            <tr id="relig">
+            
+                <th>Religion</th>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="relig_sum"></input>
+                </td>
+            
+                <td>=</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="relig_base"></input>
+                </td>
+            
+                <td>+</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="relig_bonus"></input>
+                </td>
+            
+            
+                <td>
+                    <input type="checkbox" class="cb" id="relig_st" onhisnge="updateStats()"></input>
+                </td>
+            </tr>
+
+            <tr id="SoH">
+            
+                <th>Sleight of Hand</th>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="SoH_sum"></input>
+                </td>
+            
+                <td>=</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="SoH_base"></input>
+                </td>
+            
+                <td>+</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="SoH_bonus"></input>
+                </td>
+            
+            
+                <td>
+                    <input type="checkbox" class="cb" id="SoH_st" onhisnge="updateStats()"></input>
+                </td>
+            </tr>
+
+            <tr id="stl">
+            
+                <th>Stealth</th>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="stl_sum"></input>
+                </td>
+            
+                <td>=</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="stl_base"></input>
+                </td>
+            
+                <td>+</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="stl_bonus"></input>
+                </td>
+            
+            
+                <td>
+                    <input type="checkbox" class="cb" id="stl_st" onhisnge="updateStats()"></input>
+                </td>
+            </tr>
+
+            <tr id="surv">
+            
+                <th>Survival</th>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="surv_sum"></input>
+                </td>
+            
+                <td>=</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="surv_base"></input>
+                </td>
+            
+                <td>+</td>
+            
+                <td>
+                    <input type="text" value="+0" class="txta" id="surv_bonus"></input>
+                </td>
+            
+            
+                <td>
+                    <input type="checkbox" class="cb" id="surv_st" onhisnge="updateStats()"></input>
+                </td>
+            </tr>
+        </table>
+    </div>
+
 </body>
+
 </html>

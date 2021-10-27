@@ -45,7 +45,7 @@ function updateStats() {
 function statInc(stat) {
     const current_bonus = parseInt(document.getElementById(stat).value);
 
-    if (current_bonus <= 99)
+    if (current_bonus < 99)
     {
         document.getElementById(stat).value = current_bonus + 1;
     }
@@ -56,7 +56,7 @@ function statInc(stat) {
 function statDec(stat) {
     const current_bonus = parseInt(document.getElementById(stat).value);
 
-    if (current_bonus > -9)
+    if (current_bonus > -99)
     {
         document.getElementById(stat).value = current_bonus - 1;
     }

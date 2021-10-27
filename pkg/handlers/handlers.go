@@ -231,3 +231,16 @@ func WriteSheetHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 }
+
+func CharacterSheetHandler(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("In CharacterSheetHandler()")
+	defer fmt.Print("Out of CharacterSheetHandler()\n\n****************\n\n")
+	printRequestInfo(req)
+
+	t, err := template.ParseFiles("web/character_sheet.html")
+	if err != nil {
+		fmt.Printf("Error in parsing character_sheet.html:\t%v\n", err)
+		return
+	}
+	t.Execute(w, nil)
+}

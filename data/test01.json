@@ -2,72 +2,72 @@
 	"Level": 0,
 	"ProficiencyBonus": 2,
 	"StatsBase": {
-		"Strength": 13,
-		"Dexterity": 8,
-		"Constitution": 19,
-		"Intelligence": 11,
-		"Wisdom": 16,
-		"Charisma": 16
+		"Strength": 18,
+		"Dexterity": 11,
+		"Constitution": 7,
+		"Intelligence": 17,
+		"Wisdom": 18,
+		"Charisma": 14
 	},
 	"StatsBonuses": {
-		"Strength": -1,
-		"Dexterity": 0,
-		"Constitution": 1,
-		"Intelligence": 2,
-		"Wisdom": 1,
-		"Charisma": -4
+		"Strength": 23,
+		"Dexterity": 99,
+		"Constitution": -99,
+		"Intelligence": 35,
+		"Wisdom": 34,
+		"Charisma": -7
 	},
 	"StatsSum": {
-		"Strength": 12,
-		"Dexterity": 8,
-		"Constitution": 20,
-		"Intelligence": 13,
-		"Wisdom": 17,
-		"Charisma": 12
+		"Strength": 41,
+		"Dexterity": 110,
+		"Constitution": -92,
+		"Intelligence": 52,
+		"Wisdom": 52,
+		"Charisma": 7
 	},
 	"StatsModifiers": {
-		"Strength": 1,
-		"Dexterity": -1,
-		"Constitution": 5,
-		"Intelligence": 1,
-		"Wisdom": 3,
-		"Charisma": 1
+		"Strength": 15,
+		"Dexterity": 50,
+		"Constitution": -51,
+		"Intelligence": 21,
+		"Wisdom": 21,
+		"Charisma": -2
 	},
 	"STModifiers": {
-		"Strength": 1,
-		"Dexterity": -1,
-		"Constitution": 5,
-		"Intelligence": 1,
-		"Wisdom": 3,
-		"Charisma": 1
+		"Strength": 15,
+		"Dexterity": 50,
+		"Constitution": -51,
+		"Intelligence": 21,
+		"Wisdom": 21,
+		"Charisma": -2
 	},
 	"STProficiency": {
-		"Strength": true,
+		"Strength": false,
 		"Dexterity": false,
 		"Constitution": false,
-		"Intelligence": true,
+		"Intelligence": false,
 		"Wisdom": false,
 		"Charisma": false
 	},
 	"SkillsModifiers": {
-		"Acrobatics": -1,
-		"AnimalHandling": 3,
-		"Arcana": 1,
-		"Athletics": 1,
-		"Deception": 1,
-		"History": 1,
-		"Insight": 3,
-		"Intimidation": 1,
-		"Investigation": 1,
-		"Medicine": 3,
-		"Nature": 1,
-		"Perception": 3,
-		"Performance": 1,
-		"Persuasion": 1,
-		"Religion": 1,
-		"SleightOfHand": -1,
-		"Stealth": -1,
-		"Survival": 3
+		"Acrobatics": 50,
+		"AnimalHandling": 21,
+		"Arcana": 21,
+		"Athletics": 15,
+		"Deception": -2,
+		"History": 21,
+		"Insight": 21,
+		"Intimidation": -2,
+		"Investigation": 21,
+		"Medicine": 21,
+		"Nature": 21,
+		"Perception": 21,
+		"Performance": -2,
+		"Persuasion": -2,
+		"Religion": 21,
+		"SleightOfHand": 50,
+		"Stealth": 50,
+		"Survival": 21
 	},
 	"SkillsProficiency": {
 		"Acrobatics": false,
@@ -89,5 +89,5 @@
 		"Stealth": false,
 		"Survival": false
 	},
-	"PassiveWisdom": 13
+	"PassiveWisdom": 31
 }

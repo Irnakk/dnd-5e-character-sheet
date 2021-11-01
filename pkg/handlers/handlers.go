@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"strconv"
 
 	"dnd-5e-character-sheet/pkg/csdata"
 	"dnd-5e-character-sheet/pkg/dice"
@@ -143,17 +144,41 @@ func ReadSheetHandler(w http.ResponseWriter, req *http.Request) {
 
 	fmt.Printf("Parsed id:\t%v\n", requestReply.Identifier)
 
-	jsonFile, err := os.Open("data/" + requestReply.Identifier + ".json")
-	if err != nil {
-		fmt.Printf("Error in opening file:\t%v\n", err)
-		return
-	}
-	defer jsonFile.Close()
+	var (
+		sheet     csdata.CharacterSheet
+		byteValue []byte
+	)
 
-	byteValue, err := ioutil.ReadAll(jsonFile)
-	if err != nil {
-		fmt.Printf("Error in reading file:\t%v\n", err)
-		return
+	if id, err := strconv.Atoi(requestReply.Identifier); err != nil {
+		fmt.Printf("Error in parsing int in identifier <<%s>>:\t%v\n", requestReply.Identifier, err)
+		fmt.Printf("Trying to read data/%s.json\n", requestReply.Identifier)
+
+		jsonFile, err := os.Open("data/" + requestReply.Identifier + ".json")
+		if err != nil {
+			fmt.Printf("Error in opening file:\t%v\n", err)
+			return
+		}
+		defer jsonFile.Close()
+
+		byteValue, err = ioutil.ReadAll(jsonFile)
+		if err != nil {
+			fmt.Printf("Error in reading file:\t%v\n", err)
+			return
+		}
+	} else {
+		fmt.Printf("Reading from DB, id=%d\n", id)
+
+		err = sheet.ReadFromDB(id)
+		if err != nil {
+			fmt.Printf("Error in reading from DB, id=%d:\t%v\n", id, err)
+			return
+		}
+
+		byteValue, err = json.MarshalIndent(sheet, "", "	")
+		if err != nil {
+			fmt.Printf("Error in marshalling sheet:\t%v\n", err)
+			return
+		}
 	}
 
 	w.Header().Set("Content-Type", "application/json") // Not really sure why this is required

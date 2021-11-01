@@ -345,6 +345,8 @@ func (sheet *CharacterSheet) ReadFromDB(id int) error {
 		return err
 	}
 	fmt.Printf("Query result:\n%v\n", sheet)
+	sheet.Update()
+	fmt.Printf("Sheet after Update():\n%v\n", sheet)
 
 	return nil
 }

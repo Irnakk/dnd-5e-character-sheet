@@ -34,6 +34,7 @@ func main() {
 	http.HandleFunc("/roll-stats", handlers.RollStatsHandler)
 	http.HandleFunc("/read-sheet", handlers.ReadSheetHandler)
 	http.HandleFunc("/write-stats", handlers.WriteStatsHandler)
+	http.HandleFunc("/write-st", handlers.WriteSTHandler)
 
 	fmt.Print("Listening on port 8080.\n\n")
 	http.ListenAndServe(":8080", nil)

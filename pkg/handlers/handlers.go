@@ -199,3 +199,41 @@ func WriteStatsHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 }
+
+func WriteSTHandler(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("In WriteSTHandler()")
+	defer fmt.Print("Out of WriteSTHandler()\n\n****************\n\n")
+	printRequestInfo(req)
+
+	var requestReply struct {
+		Identifier    string
+		STProficiency csdata.SixStatsCheck
+	}
+
+	err := json.NewDecoder(req.Body).Decode(&requestReply)
+	if err != nil {
+		fmt.Printf("Error in decoding saving throws info:\t%v\n", err)
+		return
+	}
+
+	fmt.Printf("~~~~~~~~~~~~~~~~\nrequestReply:\n%v\n~~~~~~~~~~~~~~~~\n", requestReply)
+
+	fmt.Printf("Parsed id:\t%v\n", requestReply.Identifier)
+
+	var sheet csdata.CharacterSheet
+
+	if err = sheet.ReadFromFile(requestReply.Identifier); err == nil {
+		fmt.Printf("Read from file data/%s.json successfully!\n", requestReply.Identifier)
+	}
+
+	// Does not matter whether we could read the sheet from the file or not,
+	// we still assign the new values to the fields
+
+	sheet.STProficiency = requestReply.STProficiency
+	sheet.Update()
+	err = sheet.WriteFile(requestReply.Identifier)
+	if err != nil {
+		fmt.Printf("Error in writing sheet to file:\t%v\n", err)
+		return
+	}
+}

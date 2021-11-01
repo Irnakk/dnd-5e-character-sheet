@@ -90,7 +90,6 @@ type SkillsCheck struct {
 }
 
 func (sheet *CharacterSheet) Update() {
-	// Add ProficiencyBonus count from level
 	sheet.countProficiencyBonus()
 
 	sheet.countStatsSum()
@@ -346,6 +345,39 @@ func (sheet *CharacterSheet) ReadFromDB(id int) error {
 		return err
 	}
 	fmt.Printf("Query result:\n%v\n", sheet)
+
+	return nil
+}
+
+func (sheet *CharacterSheet) ReadFromFile(name string) error {
+	file_path := "data/" + name + ".json"
+
+	fmt.Printf("Checking if %s exists...\n", file_path)
+
+	if _, err := os.Stat(file_path); err == nil {
+		fmt.Printf("File %s; reading data from file...\n", file_path)
+
+		jsonFile, err := os.Open(file_path)
+		if err != nil {
+			fmt.Printf("Error in opening file:\t%v\n", err)
+			return err
+		}
+		defer jsonFile.Close()
+
+		byteValue, err := ioutil.ReadAll(jsonFile)
+		if err != nil {
+			fmt.Printf("Error in reading file:\t%v\n", err)
+			return err
+		}
+
+		if err = json.Unmarshal(byteValue, &sheet); err != nil {
+			fmt.Printf("Error in unmarshaling json:\t%v\n", err)
+			return err
+		}
+	} else {
+		fmt.Printf("File does not exist:\t%v\n", err)
+		return err
+	}
 
 	return nil
 }

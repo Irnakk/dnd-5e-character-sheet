@@ -10,7 +10,7 @@
 		"Charisma": 16
 	},
 	"StatsBonuses": {
-		"Strength": -1,
+		"Strength": -4,
 		"Dexterity": 0,
 		"Constitution": 1,
 		"Intelligence": 2,
@@ -18,7 +18,7 @@
 		"Charisma": -4
 	},
 	"StatsSum": {
-		"Strength": 12,
+		"Strength": 9,
 		"Dexterity": 8,
 		"Constitution": 20,
 		"Intelligence": 13,
@@ -26,7 +26,7 @@
 		"Charisma": 12
 	},
 	"StatsModifiers": {
-		"Strength": 1,
+		"Strength": -1,
 		"Dexterity": -1,
 		"Constitution": 5,
 		"Intelligence": 1,
@@ -37,7 +37,7 @@
 		"Strength": 1,
 		"Dexterity": -1,
 		"Constitution": 5,
-		"Intelligence": 1,
+		"Intelligence": 3,
 		"Wisdom": 3,
 		"Charisma": 1
 	},
@@ -50,27 +50,27 @@
 		"Charisma": false
 	},
 	"SkillsModifiers": {
-		"Acrobatics": -1,
+		"Acrobatics": 1,
 		"AnimalHandling": 3,
 		"Arcana": 1,
-		"Athletics": 1,
+		"Athletics": -1,
 		"Deception": 1,
 		"History": 1,
 		"Insight": 3,
 		"Intimidation": 1,
 		"Investigation": 1,
-		"Medicine": 3,
-		"Nature": 1,
+		"Medicine": 5,
+		"Nature": 3,
 		"Perception": 3,
 		"Performance": 1,
 		"Persuasion": 1,
 		"Religion": 1,
 		"SleightOfHand": -1,
 		"Stealth": -1,
-		"Survival": 3
+		"Survival": 5
 	},
 	"SkillsProficiency": {
-		"Acrobatics": false,
+		"Acrobatics": true,
 		"AnimalHandling": false,
 		"Arcana": false,
 		"Athletics": false,
@@ -79,15 +79,15 @@
 		"Insight": false,
 		"Intimidation": false,
 		"Investigation": false,
-		"Medicine": false,
-		"Nature": false,
+		"Medicine": true,
+		"Nature": true,
 		"Perception": false,
 		"Performance": false,
 		"Persuasion": false,
 		"Religion": false,
 		"SleightOfHand": false,
 		"Stealth": false,
-		"Survival": false
+		"Survival": true
 	},
 	"PassiveWisdom": 13
 }

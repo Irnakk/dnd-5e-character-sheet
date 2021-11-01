@@ -160,9 +160,9 @@ func ReadSheetHandler(w http.ResponseWriter, req *http.Request) {
 	w.Write(byteValue)
 }
 
-func WriteSheetHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("In WriteSheetHandler()")
-	defer fmt.Print("Out of WriteSheetHandler()\n\n****************\n\n")
+func WriteStatsHandler(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("In WriteStatsHandler()")
+	defer fmt.Print("Out of WriteStatsHandler()\n\n****************\n\n")
 	printRequestInfo(req)
 
 	var requestReply struct {
@@ -173,7 +173,7 @@ func WriteSheetHandler(w http.ResponseWriter, req *http.Request) {
 
 	err := json.NewDecoder(req.Body).Decode(&requestReply)
 	if err != nil {
-		fmt.Printf("Error in decoding sheet info:\t%v\n", err)
+		fmt.Printf("Error in decoding stats info:\t%v\n", err)
 		return
 	}
 
@@ -182,6 +182,13 @@ func WriteSheetHandler(w http.ResponseWriter, req *http.Request) {
 	fmt.Printf("Parsed id:\t%v\n", requestReply.Identifier)
 
 	var sheet csdata.CharacterSheet
+
+	if err = sheet.ReadFromFile(requestReply.Identifier); err == nil {
+		fmt.Printf("Read from file data/%s.json successfully!\n", requestReply.Identifier)
+	}
+
+	// Does not matter whether we could read the sheet from the file or not,
+	// we still assign the new values to the fields
 
 	sheet.StatsBase = requestReply.StatsBase
 	sheet.StatsBonuses = requestReply.StatsBonuses

@@ -10,12 +10,6 @@ import (
 )
 
 func main() {
-	// err := testWrite()
-	// if err != nil {
-	// 	fmt.Printf("Error in writing file:\t%v\n", err)
-	// 	return
-	// }
-
 	fmt.Println("Starting func main()...")
 	fmt.Printf("at:\t%v\n", time.Now())
 	wd, err := os.Getwd()

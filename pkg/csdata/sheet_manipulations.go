@@ -1,89 +1,8 @@
 package csdata
 
 import (
-	"encoding/json"
-	"fmt"
 	"math"
-	"os"
 )
-
-type CharacterSheet struct {
-	Level            int
-	ProficiencyBonus int
-
-	StatsBase      SixStats
-	StatsBonuses   SixStats
-	StatsSum       SixStats
-	StatsModifiers SixStats
-
-	STModifiers   SixStats
-	STProficiency SixStatsCheck
-
-	SkillsModifiers   Skills
-	SkillsProficiency SkillsCheck
-
-	PassiveWisdom int
-}
-
-type SixStats struct {
-	Strength     int
-	Dexterity    int
-	Constitution int
-	Intelligence int
-	Wisdom       int
-	Charisma     int
-}
-
-type SixStatsCheck struct {
-	Strength     bool
-	Dexterity    bool
-	Constitution bool
-	Intelligence bool
-	Wisdom       bool
-	Charisma     bool
-}
-
-type Skills struct {
-	Acrobatics     int
-	AnimalHandling int
-	Arcana         int
-	Athletics      int
-	Deception      int
-	History        int
-	Insight        int
-	Intimidation   int
-	Investigation  int
-	Medicine       int
-	Nature         int
-	Perception     int
-	Performance    int
-	Persuasion     int
-	Religion       int
-	SleightOfHand  int
-	Stealth        int
-	Survival       int
-}
-
-type SkillsCheck struct {
-	Acrobatics     bool
-	AnimalHandling bool
-	Arcana         bool
-	Athletics      bool
-	Deception      bool
-	History        bool
-	Insight        bool
-	Intimidation   bool
-	Investigation  bool
-	Medicine       bool
-	Nature         bool
-	Perception     bool
-	Performance    bool
-	Persuasion     bool
-	Religion       bool
-	SleightOfHand  bool
-	Stealth        bool
-	Survival       bool
-}
 
 func (sheet *CharacterSheet) Update() {
 	// Add ProficiencyBonus count from level
@@ -263,32 +182,4 @@ func (sheet *CharacterSheet) countSkillsModifiers() {
 	if sheet.SkillsProficiency.Survival {
 		sheet.SkillsModifiers.Survival += sheet.ProficiencyBonus
 	}
-}
-
-func (sheet *CharacterSheet) WriteFile(name string) error {
-	marshaledResult, err := json.MarshalIndent(sheet, "", "	")
-	if err != nil {
-		fmt.Printf("Error in marshalling response_object:\t%v\n", err)
-		return err
-	}
-
-	file, err := os.Create("data/" + name + ".json")
-	if err != nil {
-		fmt.Printf("Error in creating file:\t%v\n", err)
-		return err
-	}
-
-	_, err = file.Write(marshaledResult)
-	if err != nil {
-		fmt.Printf("Error in writing to file:\t%v\n", err)
-		return err
-	}
-
-	err = file.Close()
-	if err != nil {
-		fmt.Printf("Error in closing file:\t%v\n", err)
-		return err
-	}
-
-	return nil
 }

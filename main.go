@@ -26,15 +26,23 @@ func main() {
 	http.HandleFunc("/roll", handlers.RollHandler)
 	http.HandleFunc("/stats", handlers.StatsHandler)
 	http.HandleFunc("/favicon.ico", handlers.IconHandler)
-	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("web")))) // Not entirely sure why it is written like this
-	http.Handle("/scripts/", http.StripPrefix("/scripts/", http.FileServer(http.Dir("web"))))
+	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("web/css")))) // Not entirely sure why it is written like this
+	http.Handle("/scripts/", http.StripPrefix("/scripts/", http.FileServer(http.Dir("web/scripts"))))
 	http.HandleFunc("/roll-result", handlers.RollResultHandler)
 	http.HandleFunc("/saving-throws", handlers.SavingThrowsHandler)
+	http.HandleFunc("/skills", handlers.SkillsHandler)
+	http.HandleFunc("/register", handlers.RegisterHandler)
+	http.HandleFunc("/login", handlers.LoginHandler)
+	http.HandleFunc("/sheet", handlers.CharacterSheetHandler)
 
 	http.HandleFunc("/roll-stats", handlers.RollStatsHandler)
 	http.HandleFunc("/read-sheet", handlers.ReadSheetHandler)
 	http.HandleFunc("/write-stats", handlers.WriteStatsHandler)
 	http.HandleFunc("/write-st", handlers.WriteSTHandler)
+
+	// TODO:
+	// http.HandleFunc("/reg-form", handlers.WriteSheetHandler)
+	// http.HandleFunc("/login-form", handlers.WriteSheetHandler)
 
 	fmt.Print("Listening on port 8080.\n\n")
 	http.ListenAndServe(":8080", nil)

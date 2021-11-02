@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>6 Stats page</title>
     <link rel="stylesheet" href="/css/style1.css">
 </head>
 <body>
     <script src="/scripts/stats_field.js"></script>
-    <script src="/scripts/tooltips.js"></script>
     <div class = "md">
        <table>
            <tr>
@@ -35,16 +33,16 @@
             </tr>
 
            <tr id = "str">
-                <th> <span class="hover" rel="Сила">Сила</span> </th>
+                <th>Сила</th>
 
                 <td>
-                    <input type="text" value="" class="txta" id = "str_sum"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "str_sum"></textarea>
                 </td>
 
                 <td>=</td>
 
                 <td>
-                    <input type="text" value="" class="txta" id = "str_base"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "str_base"></textarea>
                 </td>
 
                 <td>+</td>
@@ -54,7 +52,7 @@
                 </td>
 
                 <td>
-                    <input type="text" value="" class="txta" id = "str_bonus"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "str_bonus">2</textarea>
                 </td>
 
                 <td id="str_bonus_plus">
@@ -62,21 +60,21 @@
                 </td>
                 
                 <td>
-                    <input type="text" value="" class="txta" id = "str_mod"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "str_mod"></textarea>
                 </td>
             </tr>   
 
            <tr id = "dex">
-                <th><span class="hover" rel="Ловкость">Ловкость</span></th>
+                <th>Ловкость</th>
 
                 <td>
-                    <input type="text" value="" class="txta" id = "dex_sum"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "dex_sum"></textarea>
                 </td>
 
                 <td>=</td>
 
                 <td>
-                    <input type="text" value="" class="txta" id = "dex_base"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "dex_base"></textarea>
                 </td>
 
                 <td>+</td>
@@ -86,7 +84,7 @@
                 </td>
 
                 <td>
-                    <input type="text" value="" class="txta" id = "dex_bonus"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "dex_bonus">2</textarea>
                 </td>
 
                 <td id="dex_bonus_plus">
@@ -94,21 +92,21 @@
                 </td>
 
                 <td>
-                    <input type="text" value="" class="txta" id = "dex_mod"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "dex_mod"></textarea>
                 </td>
             </tr> 
 
             <tr id = "con">
-                <th><span class="hover" rel="Телосложение">Телосложение</span></th>
+                <th>Телосложение</th>
             
                 <td>
-                    <input type="text" value="" class="txta" id = "con_sum"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "con_sum"></textarea>
                 </td>
             
                 <td>=</td>
             
                 <td>
-                    <input type="text" value="" class="txta" id = "con_base"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "con_base"></textarea>
                 </td>
             
                 <td>+</td>
@@ -118,7 +116,7 @@
                 </td>
 
                 <td>
-                    <input type="text" value="" class="txta" id = "con_bonus"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "con_bonus">2</textarea>
                 </td>
 
                 <td id="con_bonus_plus">
@@ -126,21 +124,21 @@
                 </td>
 
                 <td>
-                    <input type="text" value="" class="txta" id = "con_mod"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "con_mod"></textarea>
                 </td>
             </tr>
 
             <tr id = "int">
-                <th><span class="hover" rel="Интеллект">Интеллект</span></th>
+                <th>Интеллект</th>
             
                 <td>
-                    <input type="text" value="" class="txta" id = "int_sum"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "int_sum"></textarea>
                 </td>
             
                 <td>=</td>
             
                 <td>
-                    <input type="text" value="" class="txta" id = "int_base"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "int_base"></textarea>
                 </td>
             
                 <td>+</td>
@@ -150,7 +148,7 @@
                 </td>
 
                 <td>
-                    <input type="text" value="" class="txta" id = "int_bonus"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "int_bonus">-2</textarea>
                 </td>
 
                 <td id="int_bonus_plus">
@@ -158,21 +156,21 @@
                 </td>
 
                 <td>
-                    <input type="text" value="" class="txta" id = "int_mod"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "int_mod"></textarea>
                 </td>
             </tr>
 
             <tr id = "wis">
-                <th><span class="hover" rel="Мудрость">Мудрость</span></th>
+                <th>Мудрость</th>
             
                 <td>
-                    <input type="text" value="" class="txta" id = "wis_sum"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "wis_sum"></textarea>
                 </td>
             
                 <td>=</td>
             
                 <td>
-                    <input type="text" value="" class="txta" id = "wis_base"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "wis_base"></textarea>
                 </td>
             
                 <td>+</td>
@@ -182,7 +180,7 @@
                 </td>
 
                 <td>
-                    <input type="text" value="" class="txta" id = "wis_bonus"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "wis_bonus">0</textarea>
                 </td>
 
                 <td id="con_bonus_plus">
@@ -190,21 +188,21 @@
                 </td>
 
                 <td>
-                    <input type="text" value="" class="txta" id = "wis_mod"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "wis_mod"></textarea>
                 </td>
             </tr>
 
             <tr id = "cha">    
-                <th><span class="hover" rel="Харизма">Харизма</span></th>
+                <th>Харизма</th>
             
                 <td>
-                    <input type="text" value="" class="txta" id = "cha_sum"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "cha_sum"></textarea>
                 </td>
             
                 <td>=</td>
             
                 <td>
-                    <input type="text" value="" class="txta" id = "cha_base"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "cha_base"></textarea>
                 </td>
             
                 <td>+</td>
@@ -214,7 +212,7 @@
                 </td>
 
                 <td>
-                    <input type="text" value="" class="txta" id = "cha_bonus"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "cha_bonus">2</textarea>
                 </td>
 
                 <td id="cha_bonus_plus">
@@ -222,16 +220,11 @@
                 </td>
 
                 <td>
-                    <input type="text" value="" class="txta" id = "cha_mod"></input>
+                    <textarea rows="1" cols="2" class="txta" id = "cha_mod"></textarea>
                 </td>
             </tr>
        </table>
     </div>
-    <div id="hint" style = "position: absolute;
-                            display: none;
-                            background-color: black;
-                            color: aliceblue;
-                            padding: 5px;"></div>
     <div>
         <button type="button" onclick="loadStats()">Roll new stats</button>
     </div>
@@ -242,11 +235,6 @@
     </div>
     <div>
         <button type="button" onclick="writeStats('test01')">writeStats('test01')</button>
-    </div>
-    <div>
-        <button type="button" onclick="readStats('0')">readStats('0')</button>
-        <button type="button" onclick="readStats('1')">readStats('1')</button>
-        <button type="button" onclick="readStats('2')">readStats('2')</button>
     </div>
 </body>
 </html>

@@ -3,7 +3,6 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
-	"html/template"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -18,38 +17,6 @@ func printRequestInfo(req *http.Request) {
 	fmt.Printf("req.Method:\t%v\n", req.Method)
 	fmt.Printf("req.RequestURI:\t%v\n", req.RequestURI)
 	fmt.Println("----------------")
-}
-
-func IconHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("In iconHandler()")
-	defer fmt.Print("Out of iconHandler()\n\n****************\n\n")
-	http.ServeFile(w, req, "web/content/icon.png")
-}
-
-func RootHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("In rootHandler()")
-	defer fmt.Print("Out of rootHandler()\n\n****************\n\n")
-	printRequestInfo(req)
-
-	t, err := template.ParseFiles("web/index.html")
-	if err != nil {
-		fmt.Printf("Error in parsing index.html:\t%v\n", err)
-		return
-	}
-	t.Execute(w, nil)
-}
-
-func RollHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("In rollHandler()")
-	defer fmt.Print("Out of rollHandler()\n\n****************\n\n")
-	printRequestInfo(req)
-
-	t, err := template.ParseFiles("web/roll.html")
-	if err != nil {
-		fmt.Printf("Error in parsing roll.html:\t%v\n", err)
-		return
-	}
-	t.Execute(w, nil)
 }
 
 func RollResultHandler(w http.ResponseWriter, req *http.Request) {
@@ -80,19 +47,6 @@ func RollResultHandler(w http.ResponseWriter, req *http.Request) {
 	w.Write(response_data)
 }
 
-func StatsHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("In StatsHandler()")
-	defer fmt.Print("Out of StatsHandler()\n\n****************\n\n")
-	printRequestInfo(req)
-
-	t, err := template.ParseFiles("web/stats.html")
-	if err != nil {
-		fmt.Printf("Error in parsing stats.html:\t%v\n", err)
-		return
-	}
-	t.Execute(w, nil)
-}
-
 func RollStatsHandler(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("In RollStatsHandler()")
 	defer fmt.Print("Out of RollStatsHandler()\n\n****************\n\n")
@@ -112,19 +66,6 @@ func RollStatsHandler(w http.ResponseWriter, req *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json") // Not really sure why this is required
 	w.Write(response_data)
-}
-
-func SavingThrowsHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("In SavingThrowsHandler()")
-	defer fmt.Print("Out of SavingThrowsHandler()\n\n****************\n\n")
-	printRequestInfo(req)
-
-	t, err := template.ParseFiles("web/saving_throws.html")
-	if err != nil {
-		fmt.Printf("Error in parsing saving_throws.html:\t%v\n", err)
-		return
-	}
-	t.Execute(w, nil)
 }
 
 func ReadSheetHandler(w http.ResponseWriter, req *http.Request) {

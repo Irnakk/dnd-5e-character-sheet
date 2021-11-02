@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>6 Stats page</title>
     <link rel="stylesheet" href="/css/style1.css">
 </head>
 <body>
     <script src="/scripts/stats_field.js"></script>
+    <script src="/scripts/tooltips.js"></script>
     <div class = "md">
        <table>
            <tr>
@@ -33,7 +35,7 @@
             </tr>
 
            <tr id = "str">
-                <th>Сила</th>
+                <th> <span class="hover" rel="Сила">Сила</span> </th>
 
                 <td>
                     <input type="text" value="" class="txta" id = "str_sum"></input>
@@ -65,7 +67,7 @@
             </tr>   
 
            <tr id = "dex">
-                <th>Ловкость</th>
+                <th><span class="hover" rel="Ловкость">Ловкость</span></th>
 
                 <td>
                     <input type="text" value="" class="txta" id = "dex_sum"></input>
@@ -97,7 +99,7 @@
             </tr> 
 
             <tr id = "con">
-                <th>Телосложение</th>
+                <th><span class="hover" rel="Телосложение">Телосложение</span></th>
             
                 <td>
                     <input type="text" value="" class="txta" id = "con_sum"></input>
@@ -129,7 +131,7 @@
             </tr>
 
             <tr id = "int">
-                <th>Интеллект</th>
+                <th><span class="hover" rel="Интеллект">Интеллект</span></th>
             
                 <td>
                     <input type="text" value="" class="txta" id = "int_sum"></input>
@@ -161,7 +163,7 @@
             </tr>
 
             <tr id = "wis">
-                <th>Мудрость</th>
+                <th><span class="hover" rel="Мудрость">Мудрость</span></th>
             
                 <td>
                     <input type="text" value="" class="txta" id = "wis_sum"></input>
@@ -193,7 +195,7 @@
             </tr>
 
             <tr id = "cha">    
-                <th>Харизма</th>
+                <th><span class="hover" rel="Харизма">Харизма</span></th>
             
                 <td>
                     <input type="text" value="" class="txta" id = "cha_sum"></input>
@@ -225,6 +227,11 @@
             </tr>
        </table>
     </div>
+    <div id="hint" style = "position: absolute;
+                            display: none;
+                            background-color: black;
+                            color: aliceblue;
+                            padding: 5px;"></div>
     <div>
         <button type="button" onclick="loadStats()">Roll new stats</button>
     </div>

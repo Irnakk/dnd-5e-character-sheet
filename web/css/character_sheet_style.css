@@ -9,7 +9,12 @@
 .hide {
   display: none !important;
 }
-
+a {
+  text-decoration: none;
+  color: black;
+  font-size: 13px;
+  font-weight: bold;
+}
 textarea {
   font-size: 12px;
   text-align: left;
@@ -30,7 +35,7 @@ div.box {
 }
 
 form.charsheet {
-  width: 800px;
+  width: 1100px;
   right: 0;
   left: 0;
   margin-right: auto;
@@ -164,10 +169,10 @@ form.charsheet main > section section.attributes div.scores {
   width: 101px;
   background-color: #bbb;
   border-radius: 10px;
-  padding-bottom: 5px;
+  padding-bottom: 20px;
 }
 form.charsheet main > section section.attributes div.scores label {
-  font-size: 8px;
+  font-size: 11px;
   font-weight: bold;
 }
 form.charsheet main > section section.attributes div.scores ul {
@@ -179,7 +184,7 @@ form.charsheet main > section section.attributes div.scores ul {
 }
 form.charsheet main > section section.attributes div.scores ul li {
   height: 80px;
-  width: 70px;
+  width: 90px;
   background-color: white;
   border: 1px solid black;
   text-align: center;
@@ -317,7 +322,8 @@ form.charsheet
   ul
   li
   > * {
-  margin-left: 5px;
+  margin-left: 8px;
+  padding-bottom: 3px;
 }
 form.charsheet
   main
@@ -329,7 +335,7 @@ form.charsheet
   li
   label {
   text-transform: none;
-  font-size: 8px;
+  font-size: 15px;
   text-align: left;
   order: 3;
 }
@@ -466,9 +472,9 @@ form.charsheet main section.combat > div.hp > div.regular > div.max {
   align-items: baseline;
 }
 form.charsheet main section.combat > div.hp > div.regular > div.max label {
-  font-size: 10px;
   text-transform: none;
-  color: #bbb;
+  font-size: 12px;
+  color: #bbb8b8;
 }
 form.charsheet main section.combat > div.hp > div.regular > div.max input {
   width: 40%;
@@ -539,10 +545,10 @@ form.charsheet main section.combat > div.hitdice > div > div.total {
   padding: 5px 0;
 }
 form.charsheet main section.combat > div.hitdice > div > div.total label {
-  font-size: 10px;
-  color: #bbb;
   margin: 0.25em;
   text-transform: none;
+  font-size: 12px;
+  color: #bbb8b8;
 }
 form.charsheet main section.combat > div.hitdice > div > div.total input {
   font-size: 12px;
@@ -622,7 +628,7 @@ form.charsheet
   > div.marks
   div.deathfails
   label {
-  font-size: 8px;
+  font-size: 11px;
   text-align: right;
   flex: 1 50%;
 }
@@ -672,8 +678,8 @@ form.charsheet main section.attacksandspellcasting > div > table {
   width: 100%;
 }
 form.charsheet main section.attacksandspellcasting > div > table th {
-  font-size: 10px;
-  color: #ddd;
+  font-size: 12px;
+  color: #bbb8b8;
 }
 form.charsheet main section.attacksandspellcasting > div > table input {
   width: calc(100% - 4px);
@@ -711,7 +717,7 @@ form.charsheet main section.equipment > div > div.money ul > li label {
   border-radius: 10px 0 0 10px;
   border-right: 0;
   width: 20px;
-  font-size: 8px;
+  font-size: 12px;
   text-align: center;
   padding: 3px 0;
 }

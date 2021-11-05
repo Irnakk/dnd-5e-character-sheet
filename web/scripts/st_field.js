@@ -66,12 +66,12 @@ function readST(identifier) {
     httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
             const loadedStats = JSON.parse(this.responseText);
-            str_mod = loadedStats.STModifiers.Strength;
-            dex_mod = loadedStats.STModifiers.Dexterity;
-            con_mod = loadedStats.STModifiers.Constitution;
-            int_mod = loadedStats.STModifiers.Intelligence;
-            wis_mod = loadedStats.STModifiers.Wisdom;
-            cha_mod = loadedStats.STModifiers.Charisma;
+            str_mod = loadedStats.StatsModifiers.Strength;
+            dex_mod = loadedStats.StatsModifiers.Dexterity;
+            con_mod = loadedStats.StatsModifiers.Constitution;
+            int_mod = loadedStats.StatsModifiers.Intelligence;
+            wis_mod = loadedStats.StatsModifiers.Wisdom;
+            cha_mod = loadedStats.StatsModifiers.Charisma;
 
             if (str_mod < 0) {
                 document.getElementById("str_base").value = str_mod;
@@ -125,4 +125,32 @@ function readST(identifier) {
     httpRequest.open("POST", "read-sheet"); // Does not work wit GET
     httpRequest.setRequestHeader("Content-Type", "application/json"); // It works without it, though
     httpRequest.send(JSON.stringify(reply));
+}
+
+function writeST(identifier) {
+    const httpRequest = new XMLHttpRequest();
+
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+            alert("Saved saving throws to file");
+        }
+    }
+
+    const reply = {
+        Identifier: identifier,
+
+        STProficiency: {
+            Strength:       document.getElementById("str_st").checked,
+            Dexterity:      document.getElementById("dex_st").checked,
+            Constitution:   document.getElementById("con_st").checked,
+            Intelligence:   document.getElementById("int_st").checked,
+            Wisdom:         document.getElementById("wis_st").checked,
+            Charisma:       document.getElementById("cha_st").checked
+        }
+    }
+
+    httpRequest.open("POST", "write-st"); // Does not work wit GET
+    httpRequest.setRequestHeader("Content-Type", "application/json"); // It works without it, though
+    httpRequest.send(JSON.stringify(reply));
+    console.log(JSON.stringify(reply))
 }

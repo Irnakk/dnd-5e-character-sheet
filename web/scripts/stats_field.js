@@ -164,7 +164,7 @@ function writeStats(identifier) {
         }
     }
 
-    httpRequest.open("POST", "write-sheet"); // Does not work wit GET
+    httpRequest.open("POST", "write-stats"); // Does not work wit GET
     httpRequest.setRequestHeader("Content-Type", "application/json"); // It works without it, though
     httpRequest.send(JSON.stringify(reply));
     console.log(JSON.stringify(reply))

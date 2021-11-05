@@ -11,6 +11,8 @@ import (
 	_ "github.com/lib/pq"
 )
 
+// WriteFile marshals the sheet and saves the data into
+// a JSON file with a given name into the data/ folder.
 func (sheet *CharacterSheet) WriteFile(name string) error {
 	marshaledResult, err := json.MarshalIndent(sheet, "", "	")
 	if err != nil {
@@ -39,37 +41,9 @@ func (sheet *CharacterSheet) WriteFile(name string) error {
 	return nil
 }
 
-/*
-func (sheet *CharacterSheet) WriteFile(name string) error {
-	marshaledResult, err := json.MarshalIndent(sheet, "", "	")
-	if err != nil {
-		fmt.Printf("Error in marshalling response_object:\t%v\n", err)
-		return err
-	}
-
-	file, err := os.Create("data/" + name + ".json")
-	if err != nil {
-		fmt.Printf("Error in creating file:\t%v\n", err)
-		return err
-	}
-
-	_, err = file.Write(marshaledResult)
-	if err != nil {
-		fmt.Printf("Error in writing to file:\t%v\n", err)
-		return err
-	}
-
-	err = file.Close()
-	if err != nil {
-		fmt.Printf("Error in closing file:\t%v\n", err)
-		return err
-	}
-
-	return nil
-}
-
-*/
-
+// ReadFromFile checks if a JSON file with a given name exists
+// at data/ folder, reads the sheet object from the file
+// and saves the data into the current sheet.
 func (sheet *CharacterSheet) ReadFromFile(name string) error {
 	file_path := "data/" + name + ".json"
 
@@ -127,13 +101,17 @@ func (sheet *CharacterSheet) ReadFromDB(id int) error {
 	defer db.Close()
 
 	query := fmt.Sprintf(`
-	SELECT "current_level",
+	SELECT
+	"current_level",
 	"str_base", "dex_base", "con_base",
 	"int_base", "wis_base", "cha_base",
+
 	"str_bonus", "dex_bonus", "con_bonus",
 	"int_bonus", "wis_bonus", "cha_bonus",
+
 	"st_str_prof", "st_dex_prof", "st_con_prof",
 	"st_int_prof", "st_wis_prof", "st_cha_prof"
+
 	FROM "sheets"
 	WHERE "sheet_id" = %d;`, id)
 
@@ -141,10 +119,13 @@ func (sheet *CharacterSheet) ReadFromDB(id int) error {
 
 	err = result.Scan(
 		&sheet.Level,
+
 		&sheet.StatsBase.Strength, &sheet.StatsBase.Dexterity, &sheet.StatsBase.Constitution,
 		&sheet.StatsBase.Intelligence, &sheet.StatsBase.Wisdom, &sheet.StatsBase.Charisma,
+
 		&sheet.StatsBonuses.Strength, &sheet.StatsBonuses.Dexterity, &sheet.StatsBonuses.Constitution,
 		&sheet.StatsBonuses.Intelligence, &sheet.StatsBonuses.Wisdom, &sheet.StatsBonuses.Charisma,
+
 		&sheet.STProficiency.Strength, &sheet.STProficiency.Dexterity, &sheet.STProficiency.Constitution,
 		&sheet.STProficiency.Intelligence, &sheet.STProficiency.Wisdom, &sheet.STProficiency.Charisma,
 	)
@@ -152,13 +133,24 @@ func (sheet *CharacterSheet) ReadFromDB(id int) error {
 		fmt.Printf("Error in scanning:\t%v\n", err)
 		return err
 	}
+
 	fmt.Printf("Query result:\n%v\n", sheet)
+
 	sheet.Update()
 	fmt.Printf("Sheet after Update():\n%v\n", sheet)
 
 	return nil
 }
 
+// WriteToDB performs an SQL query and
+// updates the row with a given id.
+// The following fields are copied from the sheet:
+// level,
+// six stats - base,
+// six stats - bonuses,
+// saving throws proficiency.
+// Note: if the query does not find a row with
+// a given id, a new row will not be added.
 func (sheet *CharacterSheet) WriteToDB(id int) error {
 	file_content, err := ioutil.ReadFile("C:/d5cs/db_login")
 	if err != nil {
@@ -191,6 +183,7 @@ func (sheet *CharacterSheet) WriteToDB(id int) error {
 	WHERE "sheet_id" = $20;
 	`
 
+	// looks like it is a better way to perform a query with arguments
 	result, err := db.Exec(query,
 		sheet.Level,
 		sheet.StatsBase.Strength, sheet.StatsBase.Dexterity, sheet.StatsBase.Constitution,

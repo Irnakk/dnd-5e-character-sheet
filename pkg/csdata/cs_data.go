@@ -1,5 +1,16 @@
+/*
+Package csdata (stands for Character Sheet Data) provides:
+
+a. the data structures involved in the creation and use of a
+character sheet
+
+b. functions that manipulate the data stored in a character sheet
+and help to fill in the data.
+*/
 package csdata
 
+// CharacterSheet includes the character information
+// including the derived fields such as modifiers.
 type CharacterSheet struct {
 	Level            int
 	ProficiencyBonus int
@@ -18,6 +29,11 @@ type CharacterSheet struct {
 	PassiveWisdom int
 }
 
+// SixStats structure is used in both
+// describing the value of a base character stat
+// (such as Intelligence) and the corresponding
+// stat modifiers (both for stats modifiers and
+// saving throws modifiers).
 type SixStats struct {
 	Strength     int
 	Dexterity    int
@@ -27,6 +43,8 @@ type SixStats struct {
 	Charisma     int
 }
 
+// SixStatsCheck is used to describe proficiency
+// in saving throws.
 type SixStatsCheck struct {
 	Strength     bool
 	Dexterity    bool
@@ -36,6 +54,8 @@ type SixStatsCheck struct {
 	Charisma     bool
 }
 
+// Skills is used to store the modifiers
+// for each skill.
 type Skills struct {
 	Acrobatics     int
 	AnimalHandling int
@@ -57,6 +77,8 @@ type Skills struct {
 	Survival       int
 }
 
+// Skills check is used to describe proficiency
+// in skills.
 type SkillsCheck struct {
 	Acrobatics     bool
 	AnimalHandling bool

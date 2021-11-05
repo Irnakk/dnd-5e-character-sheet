@@ -12,6 +12,9 @@ import (
 	"dnd-5e-character-sheet/pkg/dice"
 )
 
+// Function outputs the request info into the terminal output:
+//  * Request Method
+//  * Request URI
 func printRequestInfo(req *http.Request) {
 	fmt.Println("----------------")
 	fmt.Printf("req.Method:\t%v\n", req.Method)
@@ -19,6 +22,19 @@ func printRequestInfo(req *http.Request) {
 	fmt.Println("----------------")
 }
 
+// Function performs <Number> rolls of <Value>-sided dice.
+//
+// Input:
+//
+// Function receives {Number int, Value int} structure in the
+// request body.
+//
+// Output:
+//
+// Function returns a marshaled {Number, Value, Result} object in
+// the request reply.
+//
+// URI: /roll-result
 func RollResultHandler(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("In rollResultHandler()")
 	defer fmt.Print("Out of rollResultHandler()\n\n****************\n\n")
@@ -47,6 +63,17 @@ func RollResultHandler(w http.ResponseWriter, req *http.Request) {
 	w.Write(response_data)
 }
 
+// Function creates a random ("4d6 per stat") SixStats object.
+//
+// Input:
+//
+// Function does not receive any particular data in the request body.
+//
+// Output:
+//
+// Function replies with a marshaled SixStats object.
+//
+// URI: /roll-stats
 func RollStatsHandler(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("In RollStatsHandler()")
 	defer fmt.Print("Out of RollStatsHandler()\n\n****************\n\n")
@@ -68,6 +95,18 @@ func RollStatsHandler(w http.ResponseWriter, req *http.Request) {
 	w.Write(response_data)
 }
 
+// Function attempts to read the sheet data from a DB if the
+// sheet id is numerical, otherwise the data is read from a JSON file.
+//
+// Input:
+//
+// Function receives {Identifier string} in the request body.
+//
+// Output:
+//
+// Function replies with a marshaled CharacterSheet object.
+//
+// URI: /read-sheet
 func ReadSheetHandler(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("In ReadSheetHandler()")
 	defer fmt.Print("Out of ReadSheetHandler()\n\n****************\n\n")
@@ -87,9 +126,13 @@ func ReadSheetHandler(w http.ResponseWriter, req *http.Request) {
 
 	var (
 		sheet     csdata.CharacterSheet
-		byteValue []byte
+		byteValue []byte // the marshaled response will be stored here
 	)
 
+	// If the sheet identifier is not a number, we read the data
+	// from the corresponding JSON file.
+	// Otherwise (id is a number), we read the data from the
+	// correspodning DB row.
 	if id, err := strconv.Atoi(requestReply.Identifier); err != nil {
 		fmt.Printf("Error in parsing int in identifier <<%s>>:\t%v\n", requestReply.Identifier, err)
 		fmt.Printf("Trying to read data/%s.json\n", requestReply.Identifier)
@@ -126,6 +169,18 @@ func ReadSheetHandler(w http.ResponseWriter, req *http.Request) {
 	w.Write(byteValue)
 }
 
+// Function updates a file with a given ID, saving stats base and bonuses.
+//
+// Input:
+//
+// Function receives {Identifier string, StatsBase SixStats,
+// StatsBonuses SixStats} object in the request body.
+//
+// Output:
+//
+// Function does not return any particular data as a request reply.
+//
+// URI: /write-stats
 func WriteStatsHandler(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("In WriteStatsHandler()")
 	defer fmt.Print("Out of WriteStatsHandler()\n\n****************\n\n")
@@ -166,6 +221,19 @@ func WriteStatsHandler(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
+// Function updates a file with a given ID, saving saving throws
+// proficiency and modifiers.
+//
+// Input:
+//
+// Function receives {Identifier string, STProficiency SixStatsCheck}
+// object in the request body.
+//
+// Output:
+//
+// Function does not return any particular data as a request reply.
+//
+// URI: /write-st
 func WriteSTHandler(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("In WriteSTHandler()")
 	defer fmt.Print("Out of WriteSTHandler()\n\n****************\n\n")

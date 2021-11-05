@@ -7,12 +7,16 @@ import (
 	"dnd-5e-character-sheet/pkg/csdata"
 )
 
+// RollInfo stores information for a single roll.
 type RollInfo struct {
 	Number int
 	Value  int
 	Result int
 }
 
+// MarshalRollSingle makes <number> rolls of <value>-sided dice
+// and returns a slice of bytes that represents a
+// marshaled RollInfo object for the rolls.
 func MarshalRollSingle(number, value int) ([]byte, error) {
 	roll_result, err := DiceRoll(number, value)
 	if err != nil {
@@ -35,6 +39,8 @@ func MarshalRollSingle(number, value int) ([]byte, error) {
 	return marshaledResult, nil
 }
 
+// RollStats returns SixStats that have been rolled with a rule of
+// "4d6 per stat".
 func RollStats() (csdata.SixStats, error) {
 	rolls := make([]int, 6)
 

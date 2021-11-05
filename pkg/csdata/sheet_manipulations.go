@@ -4,6 +4,10 @@ import (
 	"math"
 )
 
+// Update performs the calculations needed to
+// fill in the modifiers, derived stats, etc.
+// After the function is called, all the derived
+// fields in a sheet are filled in.
 func (sheet *CharacterSheet) Update() {
 	sheet.countProficiencyBonus()
 
@@ -18,6 +22,14 @@ func (sheet *CharacterSheet) Update() {
 	sheet.PassiveWisdom = 10 + sheet.SkillsModifiers.Perception
 }
 
+// Function counts the proficiency bonus basing on
+// the character level:
+//  LEVEL  | BONUS
+//   <5    |   2
+//   5-8   |   3
+//   9-12  |   4
+//  13-16  |   5
+//   >16   |   6
 func (sheet *CharacterSheet) countProficiencyBonus() {
 	if sheet.Level < 5 {
 		sheet.ProficiencyBonus = 2
@@ -32,6 +44,8 @@ func (sheet *CharacterSheet) countProficiencyBonus() {
 	}
 }
 
+// Function calculates StatsSum basing on
+// the stats base and bonus values.
 func (sheet *CharacterSheet) countStatsSum() {
 	// Wouldn't it be better to pass the resulting SixStats{} in return?
 	sheet.StatsSum = SixStats{
@@ -44,10 +58,14 @@ func (sheet *CharacterSheet) countStatsSum() {
 	}
 }
 
+// Function returns a modifier that corresponds to
+// a given stat value.
 func (sheet *CharacterSheet) modifier(value int) int {
 	return int(math.Floor((float64(value) - 10.) / 2.))
 }
 
+// Function counts all modifiers for the stats
+// stored in the sheet.
 func (sheet *CharacterSheet) countStatsModifiers() {
 	sheet.StatsModifiers = SixStats{
 		Strength:     sheet.modifier(sheet.StatsSum.Strength),
@@ -59,6 +77,10 @@ func (sheet *CharacterSheet) countStatsModifiers() {
 	}
 }
 
+// Function counts all modifiers for the saving
+// throws saved in the sheet, basing on the
+// corresponding stats modifiers and the
+// saiving throws proficiency.
 func (sheet *CharacterSheet) countSTModifiers() {
 	sheet.STModifiers.Strength = sheet.StatsModifiers.Strength
 	if sheet.STProficiency.Strength {
@@ -91,6 +113,9 @@ func (sheet *CharacterSheet) countSTModifiers() {
 	}
 }
 
+// Function counts all modifiers for the skills
+// corresponding stats modifiers and the
+// skills proficiency.
 func (sheet *CharacterSheet) countSkillsModifiers() {
 	sheet.SkillsModifiers.Acrobatics = sheet.StatsModifiers.Dexterity
 	if sheet.SkillsProficiency.Acrobatics {

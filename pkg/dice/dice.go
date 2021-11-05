@@ -1,3 +1,7 @@
+/*
+Package dice provides the basic structures and functions that allow
+to perform dice rolls.
+*/
 package dice
 
 import (
@@ -18,7 +22,9 @@ var (
 	}
 )
 
-// Starts with an upper-case letter because this func is exported
+// DiceRoll returns a number that represents a
+// summary result of a random roll of
+// <number> dice that have <value> sides.
 func DiceRoll(number, value int) (int, error) {
 	if _, found := dice_types[value]; !found {
 		return 0, errors.New("no such die")
@@ -38,7 +44,9 @@ func DiceRoll(number, value int) (int, error) {
 	return sum, nil
 }
 
-// Starts with an upper-case letter because this func is exported
+// DiceRollVerbose rolls <value>-sided dice
+// <number> times and returns a slice of roll
+// results on each iteration.
 func DiceRollVerbose(number, value int) ([]int, error) {
 	if _, found := dice_types[value]; !found {
 		return []int{}, errors.New("no such die")

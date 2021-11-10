@@ -26,7 +26,7 @@ func main() {
 	http.HandleFunc("/roll", handlers.RollHandler)
 	http.HandleFunc("/stats", handlers.StatsHandler)
 	http.HandleFunc("/favicon.ico", handlers.IconHandler)
-	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("web/css")))) // Not entirely sure why it is written like this
+	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("web/css"))))
 	http.Handle("/scripts/", http.StripPrefix("/scripts/", http.FileServer(http.Dir("web/scripts"))))
 	http.HandleFunc("/roll-result", handlers.RollResultHandler)
 	http.HandleFunc("/saving-throws", handlers.SavingThrowsHandler)

@@ -1,61 +1,30 @@
+stats = ['str', 'dex', 'con', 'int', 'wis', 'cha']
+
+proficiency_bonus = 2   
+
 function bonusUpdate(checkBoxId, bonusId) {
     if (document.getElementById(checkBoxId).checked) {
-        document.getElementById(bonusId).value = '+2';
+        document.getElementById(bonusId).value = '+' + proficiency_bonus;
     } else {
          document.getElementById(bonusId).value = '+0';
     }
 }
 
 function updateStats() {
-    bonusUpdate('str_st','str_bonus');
-    bonusUpdate('dex_st','dex_bonus');
-    bonusUpdate('con_st','con_bonus');
-    bonusUpdate('int_st','int_bonus');
-    bonusUpdate('wis_st','wis_bonus');
-    bonusUpdate('cha_st','cha_bonus');
-
-    const strSum = parseInt(document.getElementById("str_base").value) + parseInt(document.getElementById("str_bonus").value);
-    const dexSum = parseInt(document.getElementById("dex_base").value) + parseInt(document.getElementById("dex_bonus").value);
-    const conSum = parseInt(document.getElementById("con_base").value) + parseInt(document.getElementById("con_bonus").value);
-    const intSum = parseInt(document.getElementById("int_base").value) + parseInt(document.getElementById("int_bonus").value);
-    const wisSum = parseInt(document.getElementById("wis_base").value) + parseInt(document.getElementById("wis_bonus").value);
-    const chaSum = parseInt(document.getElementById("cha_base").value) + parseInt(document.getElementById("cha_bonus").value);
-    
-
-    if (strSum >= 0) {
-        document.getElementById("str_sum").value = "+" + strSum;
-    } else {
-        document.getElementById("str_sum").value = strSum;
-    }
-    
-    if (dexSum >= 0) {
-        document.getElementById("dex_sum").value = "+" + dexSum;
-    } else {
-        document.getElementById("dex_sum").value = dexSum;
+    for (i = 0; i < 6; i++) {
+        bonusUpdate(stats[i] + '_st', stats[i] + '_bonus')
     }
 
-    if (conSum >= 0) {
-        document.getElementById("con_sum").value = "+" + conSum;
-    } else {
-        document.getElementById("con_sum").value = conSum;
-    }
+    for (i = 0; i < 6; i++) {
+        stat = stats[i]
 
-    if (intSum >= 0) {
-        document.getElementById("int_sum").value = "+" + intSum;
-    } else {
-        document.getElementById("int_sum").value = intSum;
-    }
-    
-    if (wisSum >= 0) {
-        document.getElementById("wis_sum").value = "+" + wisSum;
-    } else {
-        document.getElementById("wis_sum").value = wisSum;
-    }
+        st_sum = parseInt(document.getElementById(stat + "_base").value) + parseInt(document.getElementById(stat + "_bonus").value);
 
-    if (chaSum >= 0) {
-        document.getElementById("cha_sum").value = "+" + chaSum;
-    } else {
-        document.getElementById("cha_sum").value = chaSum;
+        if (st_sum >= 0) {
+            document.getElementById(stat + "_sum").value = "+" + st_sum;
+        } else {
+            document.getElementById(stat + "_sum").value = st_sum;
+        }
     }
 
 }
@@ -72,6 +41,8 @@ function readST(identifier) {
             int_mod = loadedStats.StatsModifiers.Intelligence;
             wis_mod = loadedStats.StatsModifiers.Wisdom;
             cha_mod = loadedStats.StatsModifiers.Charisma;
+
+            proficiency_bonus = loadedStats.ProficiencyBonus;
 
             if (str_mod < 0) {
                 document.getElementById("str_base").value = str_mod;

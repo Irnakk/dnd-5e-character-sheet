@@ -110,7 +110,14 @@ func (sheet *CharacterSheet) ReadFromDB(id int) error {
 	"int_bonus", "wis_bonus", "cha_bonus",
 
 	"st_str_prof", "st_dex_prof", "st_con_prof",
-	"st_int_prof", "st_wis_prof", "st_cha_prof"
+	"st_int_prof", "st_wis_prof", "st_cha_prof",
+
+	"acrobatics",      "animal_handling", "arcana",
+	"athletics",       "deception",       "history",
+    "insight",         "intimidation",    "investigation",
+    "medicine",        "nature",          "perception",
+    "performance",     "persuasion",      "religion",
+    "sleight_of_hand", "stealth",         "survival"
 
 	FROM "sheets"
 	WHERE "sheet_id" = %d;`, id)
@@ -128,6 +135,13 @@ func (sheet *CharacterSheet) ReadFromDB(id int) error {
 
 		&sheet.STProficiency.Strength, &sheet.STProficiency.Dexterity, &sheet.STProficiency.Constitution,
 		&sheet.STProficiency.Intelligence, &sheet.STProficiency.Wisdom, &sheet.STProficiency.Charisma,
+
+		&sheet.SkillsProficiency.Acrobatics, &sheet.SkillsProficiency.AnimalHandling, &sheet.SkillsProficiency.Arcana,
+		&sheet.SkillsProficiency.Athletics, &sheet.SkillsProficiency.Deception, &sheet.SkillsProficiency.History,
+		&sheet.SkillsProficiency.Insight, &sheet.SkillsProficiency.Intimidation, &sheet.SkillsProficiency.Investigation,
+		&sheet.SkillsProficiency.Medicine, &sheet.SkillsProficiency.Nature, &sheet.SkillsProficiency.Perception,
+		&sheet.SkillsProficiency.Performance, &sheet.SkillsProficiency.Persuasion, &sheet.SkillsProficiency.Religion,
+		&sheet.SkillsProficiency.SleightOfHand, &sheet.SkillsProficiency.Stealth, &sheet.SkillsProficiency.Survival,
 	)
 	if err != nil {
 		fmt.Printf("Error in scanning:\t%v\n", err)
@@ -178,9 +192,16 @@ func (sheet *CharacterSheet) WriteToDB(id int) error {
 	"int_bonus" = $11, "wis_bonus" = $12, "cha_bonus" = $13,
 
 	"st_str_prof" = $14, "st_dex_prof" = $15, "st_con_prof" = $16,
-	"st_int_prof" = $17, "st_wis_prof" = $18, "st_cha_prof" = $19
+	"st_int_prof" = $17, "st_wis_prof" = $18, "st_cha_prof" = $19,
 
-	WHERE "sheet_id" = $20;
+	"acrobatics" = $20,      "animal_handling" = $21, "arcana" = $22,
+	"athletics" = $23,       "deception" = $24,       "history" = $25,
+    "insight" = $26,         "intimidation" = $27,    "investigation" = $28,
+    "medicine" = $29,        "nature" = $30,          "perception" = $31,
+    "performance" = $32,     "persuasion" = $33,      "religion" = $34,
+    "sleight_of_hand" = $35, "stealth" = $36,         "survival" = $37
+
+	WHERE "sheet_id" = $38;
 	`
 
 	// looks like it is a better way to perform a query with arguments
@@ -194,6 +215,13 @@ func (sheet *CharacterSheet) WriteToDB(id int) error {
 
 		sheet.STProficiency.Strength, sheet.STProficiency.Dexterity, sheet.STProficiency.Constitution,
 		sheet.STProficiency.Intelligence, sheet.STProficiency.Wisdom, sheet.STProficiency.Charisma,
+
+		sheet.SkillsProficiency.Acrobatics, sheet.SkillsProficiency.AnimalHandling, sheet.SkillsProficiency.Arcana,
+		sheet.SkillsProficiency.Athletics, sheet.SkillsProficiency.Deception, sheet.SkillsProficiency.History,
+		sheet.SkillsProficiency.Insight, sheet.SkillsProficiency.Intimidation, sheet.SkillsProficiency.Investigation,
+		sheet.SkillsProficiency.Medicine, sheet.SkillsProficiency.Nature, sheet.SkillsProficiency.Perception,
+		sheet.SkillsProficiency.Performance, sheet.SkillsProficiency.Persuasion, sheet.SkillsProficiency.Religion,
+		sheet.SkillsProficiency.SleightOfHand, sheet.SkillsProficiency.Stealth, sheet.SkillsProficiency.Survival,
 
 		id)
 	if err != nil {

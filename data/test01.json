@@ -1,6 +1,6 @@
 {
-	"Level": 0,
-	"ProficiencyBonus": 2,
+	"Level": 5,
+	"ProficiencyBonus": 3,
 	"StatsBase": {
 		"Strength": 18,
 		"Dexterity": 11,
@@ -35,7 +35,7 @@
 	},
 	"STModifiers": {
 		"Strength": 2,
-		"Dexterity": 2,
+		"Dexterity": 3,
 		"Constitution": -1,
 		"Intelligence": 4,
 		"Wisdom": 4,
@@ -50,7 +50,7 @@
 		"Charisma": false
 	},
 	"SkillsModifiers": {
-		"Acrobatics": 2,
+		"Acrobatics": 3,
 		"AnimalHandling": 4,
 		"Arcana": 4,
 		"Athletics": 2,
@@ -59,15 +59,15 @@
 		"Insight": 4,
 		"Intimidation": 0,
 		"Investigation": 4,
-		"Medicine": 6,
-		"Nature": 6,
+		"Medicine": 7,
+		"Nature": 7,
 		"Perception": 4,
 		"Performance": 0,
 		"Persuasion": 0,
 		"Religion": 4,
 		"SleightOfHand": 0,
 		"Stealth": 0,
-		"Survival": 6
+		"Survival": 7
 	},
 	"SkillsProficiency": {
 		"Acrobatics": true,

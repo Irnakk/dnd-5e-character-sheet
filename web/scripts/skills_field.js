@@ -102,3 +102,44 @@ function readSkills(identifier) {
     httpRequest.setRequestHeader("Content-Type", "application/json"); // It works without it, though
     httpRequest.send(JSON.stringify(reply));
 }
+
+
+function writeSkills(identifier) {
+    const httpRequest = new XMLHttpRequest();
+
+    httpRequest.onreadystatechange = function () {
+        if (httpRequest.readyState === XMLHttpRequest.DONE) {
+            alert("Saved skills to file");
+        }
+    }
+
+    const reply = {
+        Identifier: identifier,
+
+        SkillsProficiency: {
+            Acrobatics:     document.getElementById("acr_st").checked,
+            AnimalHandling: document.getElementById("anHand_st").checked,
+            Arcana:         document.getElementById("arc_st").checked,
+            Athletics:      document.getElementById("athl_st").checked,
+            Deception:      document.getElementById("dece_st").checked,
+            History:        document.getElementById("his_st").checked,
+            Insight:        document.getElementById("ins_st").checked,
+            Intimidation:   document.getElementById("inti_st").checked,
+            Investigation:  document.getElementById("invs_st").checked,
+            Medicine:       document.getElementById("med_st").checked,
+            Nature:         document.getElementById("nat_st").checked,
+            Perception:     document.getElementById("perce_st").checked,
+            Performance:    document.getElementById("perf_st").checked,
+            Persuasion:     document.getElementById("pers_st").checked,
+            Religion:       document.getElementById("relig_st").checked,
+            SleightOfHand:  document.getElementById("SoH_st").checked,
+            Stealth:        document.getElementById("stl_st").checked,
+            Survival:       document.getElementById("surv_st").checked
+        }
+    }
+
+    httpRequest.open("POST", "write-skills"); // Does not work wit GET
+    httpRequest.setRequestHeader("Content-Type", "application/json"); // It works without it, though
+    httpRequest.send(JSON.stringify(reply));
+    console.log(JSON.stringify(reply))
+}

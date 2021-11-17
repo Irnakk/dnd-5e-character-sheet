@@ -271,3 +271,55 @@ func WriteSTHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 }
+
+// Function updates a file with a given ID, saving skills modifiers.
+//
+// Input:
+//
+// Function receives {Identifier string, SkillsProficiency SkillsCheck}
+// object in the request body.
+//
+// Output:
+//
+// Function does not return any particular data as a request reply.
+//
+// URI: /write-skills
+func WriteSkillsHandler(w http.ResponseWriter, req *http.Request) {
+	fmt.Println("In WriteSkillsHandler()")
+	defer fmt.Print("Out of WriteSkillsHandler()\n\n****************\n\n")
+	printRequestInfo(req)
+
+	var requestReply struct {
+		Identifier        string
+		SkillsProficiency csdata.SkillsCheck
+	}
+
+	err := json.NewDecoder(req.Body).Decode(&requestReply)
+	if err != nil {
+		fmt.Printf("Error in decoding skills info:\t%v\n", err)
+		return
+	}
+
+	fmt.Printf("~~~~~~~~~~~~~~~~\nrequestReply:\n%v\n~~~~~~~~~~~~~~~~\n", requestReply)
+
+	fmt.Printf("Parsed id:\t%v\n", requestReply.Identifier)
+
+	var sheet csdata.CharacterSheet
+
+	if err = sheet.ReadFromFile(requestReply.Identifier); err == nil {
+		fmt.Printf("Read from file data/%s.json successfully!\n", requestReply.Identifier)
+	}
+
+	fmt.Printf("CharacterSheet:\n%v\n", sheet)
+
+	// Does not matter whether we could read the sheet from the file or not,
+	// we still assign the new values to the fields
+
+	sheet.SkillsProficiency = requestReply.SkillsProficiency
+	sheet.Update()
+	err = sheet.WriteFile(requestReply.Identifier)
+	if err != nil {
+		fmt.Printf("Error in writing sheet to file:\t%v\n", err)
+		return
+	}
+}

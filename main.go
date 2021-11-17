@@ -39,6 +39,7 @@ func main() {
 	http.HandleFunc("/read-sheet", handlers.ReadSheetHandler)
 	http.HandleFunc("/write-stats", handlers.WriteStatsHandler)
 	http.HandleFunc("/write-st", handlers.WriteSTHandler)
+	http.HandleFunc("/write-skills", handlers.WriteSkillsHandler)
 
 	// TODO:
 	// http.HandleFunc("/reg-form", handlers.WriteSheetHandler)

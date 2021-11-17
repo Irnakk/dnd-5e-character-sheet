@@ -1,3 +1,5 @@
+stats = ['str', 'dex', 'con', 'int', 'wis', 'cha']
+
 function loadStats() {
     // Perform an AJAX-request to the server in order for it to roll stats;
     // then receive the rolled stats and write them into corresponding fields
@@ -25,19 +27,12 @@ function loadStats() {
 }
 
 function updateStats() {
-    const strSum = parseInt(document.getElementById("str_base").value) + parseInt(document.getElementById("str_bonus").value);
-    const dexSum = parseInt(document.getElementById("dex_base").value) + parseInt(document.getElementById("dex_bonus").value);
-    const conSum = parseInt(document.getElementById("con_base").value) + parseInt(document.getElementById("con_bonus").value);
-    const intSum = parseInt(document.getElementById("int_base").value) + parseInt(document.getElementById("int_bonus").value);
-    const wisSum = parseInt(document.getElementById("wis_base").value) + parseInt(document.getElementById("wis_bonus").value);
-    const chaSum = parseInt(document.getElementById("cha_base").value) + parseInt(document.getElementById("cha_bonus").value);
-    
-    document.getElementById("str_sum").value = strSum;
-    document.getElementById("dex_sum").value = dexSum;
-    document.getElementById("con_sum").value = conSum;
-    document.getElementById("int_sum").value = intSum;
-    document.getElementById("wis_sum").value = wisSum;
-    document.getElementById("cha_sum").value = chaSum;
+    for (i = 0; i < 6; i++) {
+        base_i = parseInt(document.getElementById(stats[i] + "_base").value);
+        bonus_i = parseInt(document.getElementById(stats[i] + "_bonus").value);
+
+        document.getElementById(stats[i] + "_sum").value = base_i + bonus_i;
+    }
 
     countModifiers();
 }
@@ -65,42 +60,14 @@ function statDec(stat) {
 }
 
 function countModifiers(stat) {
-    const strMod = Math.floor((parseInt(document.getElementById("str_sum").value) - 10) / 2);
-    const dexMod = Math.floor((parseInt(document.getElementById("dex_sum").value) - 10) / 2);
-    const conMod = Math.floor((parseInt(document.getElementById("con_sum").value) - 10) / 2);
-    const intMod = Math.floor((parseInt(document.getElementById("int_sum").value) - 10) / 2);
-    const wisMod = Math.floor((parseInt(document.getElementById("wis_sum").value) - 10) / 2);
-    const chaMod = Math.floor((parseInt(document.getElementById("cha_sum").value) - 10) / 2);
+    for (i = 0; i < 6; i++) {
+        modifier_i = Math.floor((parseInt(document.getElementById(stats[i] + "_sum").value) - 10) / 2);
 
-    if (strMod < 0) {
-        document.getElementById("str_mod").value = strMod;
-    } else {
-        document.getElementById("str_mod").value = '+' + strMod.toString();
-    }
-    if (dexMod < 0) {
-        document.getElementById("dex_mod").value = dexMod;
-    } else {
-        document.getElementById("dex_mod").value = '+' + dexMod.toString();
-    }
-    if (conMod < 0) {
-        document.getElementById("con_mod").value = conMod;
-    } else {
-        document.getElementById("con_mod").value = '+' + conMod.toString();
-    }
-    if (intMod < 0) {
-        document.getElementById("int_mod").value = intMod;
-    } else {
-        document.getElementById("int_mod").value = '+' + intMod.toString();
-    }
-    if (wisMod < 0) {
-        document.getElementById("wis_mod").value = wisMod;
-    } else {
-        document.getElementById("wis_mod").value = '+' + wisMod.toString();
-    }
-    if (chaMod < 0) {
-        document.getElementById("cha_mod").value = chaMod;
-    } else {
-        document.getElementById("cha_mod").value = '+' + chaMod.toString();
+        if (modifier_i < 0) {
+            document.getElementById(stats[i] + "_mod").value = modifier_i;
+        } else {
+            document.getElementById(stats[i] + "_mod").value = '+' + modifier_i.toString();
+        }
     }
 }
 
@@ -110,19 +77,29 @@ function readStats(identifier) {
     httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
             const loadedStats = JSON.parse(this.responseText);
-            document.getElementById("str_base").value = loadedStats.StatsBase.Strength;
-            document.getElementById("dex_base").value = loadedStats.StatsBase.Dexterity;
-            document.getElementById("con_base").value = loadedStats.StatsBase.Constitution;
-            document.getElementById("int_base").value = loadedStats.StatsBase.Intelligence;
-            document.getElementById("wis_base").value = loadedStats.StatsBase.Wisdom;
-            document.getElementById("cha_base").value = loadedStats.StatsBase.Charisma;
 
-            document.getElementById("str_bonus").value = loadedStats.StatsBonuses.Strength;
-            document.getElementById("dex_bonus").value = loadedStats.StatsBonuses.Dexterity;
-            document.getElementById("con_bonus").value = loadedStats.StatsBonuses.Constitution;
-            document.getElementById("int_bonus").value = loadedStats.StatsBonuses.Intelligence;
-            document.getElementById("wis_bonus").value = loadedStats.StatsBonuses.Wisdom;
-            document.getElementById("cha_bonus").value = loadedStats.StatsBonuses.Charisma;
+            stats_base = [
+                loadedStats.StatsBase.Strength,
+                loadedStats.StatsBase.Dexterity,
+                loadedStats.StatsBase.Constitution,
+                loadedStats.StatsBase.Intelligence,
+                loadedStats.StatsBase.Wisdom,
+                loadedStats.StatsBase.Charisma
+            ]
+
+            stats_bonus = [
+                loadedStats.StatsBonuses.Strength,
+                loadedStats.StatsBonuses.Dexterity,
+                loadedStats.StatsBonuses.Constitution,
+                loadedStats.StatsBonuses.Intelligence,
+                loadedStats.StatsBonuses.Wisdom,
+                loadedStats.StatsBonuses.Charisma
+            ]
+
+            for (i = 0; i < 6; i++) {
+                document.getElementById(stats[i] + "_base").value = stats_base[i];
+                document.getElementById(stats[i] + "_bonus").value = stats_bonus[i];
+            }
 
             updateStats();
         }

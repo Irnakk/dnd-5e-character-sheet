@@ -1,6 +1,6 @@
 {
 	"Level": 0,
-	"ProficiencyBonus": 3,
+	"ProficiencyBonus": 2,
 	"StatsBase": {
 		"Strength": 18,
 		"Dexterity": 11,
@@ -35,7 +35,7 @@
 	},
 	"STModifiers": {
 		"Strength": 2,
-		"Dexterity": 0,
+		"Dexterity": 2,
 		"Constitution": -1,
 		"Intelligence": 4,
 		"Wisdom": 4,
@@ -43,7 +43,7 @@
 	},
 	"STProficiency": {
 		"Strength": false,
-		"Dexterity": false,
+		"Dexterity": true,
 		"Constitution": false,
 		"Intelligence": false,
 		"Wisdom": false,

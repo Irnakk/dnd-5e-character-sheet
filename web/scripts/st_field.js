@@ -35,57 +35,36 @@ function readST(identifier) {
     httpRequest.onreadystatechange = function () {
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
             const loadedStats = JSON.parse(this.responseText);
-            str_mod = loadedStats.StatsModifiers.Strength;
-            dex_mod = loadedStats.StatsModifiers.Dexterity;
-            con_mod = loadedStats.StatsModifiers.Constitution;
-            int_mod = loadedStats.StatsModifiers.Intelligence;
-            wis_mod = loadedStats.StatsModifiers.Wisdom;
-            cha_mod = loadedStats.StatsModifiers.Charisma;
 
-            proficiency_bonus = loadedStats.ProficiencyBonus;
+            modifiers = [
+                loadedStats.StatsModifiers.Strength,
+                loadedStats.StatsModifiers.Dexterity,
+                loadedStats.StatsModifiers.Constitution,
+                loadedStats.StatsModifiers.Intelligence,
+                loadedStats.StatsModifiers.Wisdom,
+                loadedStats.StatsModifiers.Charisma
+            ]
+            
+            st_proficiency = [
+                loadedStats.STProficiency.Strength,
+                loadedStats.STProficiency.Dexterity,
+                loadedStats.STProficiency.Constitution,
+                loadedStats.STProficiency.Intelligence,
+                loadedStats.STProficiency.Wisdom,
+                loadedStats.STProficiency.Charisma
+            ]
 
-            if (str_mod < 0) {
-                document.getElementById("str_base").value = str_mod;
-            } else {
-                document.getElementById("str_base").value = '+' + str_mod;
+            proficiency_bonus = loadedStats.ProficiencyBonus; // Changes the global value
+
+            for (i = 0; i < 6; i++) {
+                if (modifiers[i] < 0) {
+                    document.getElementById(stats[i] + "_base").value = modifiers[i];
+                } else {
+                    document.getElementById(stats[i] + "_base").value = '+' + modifiers[i];
+                }
+
+                document.getElementById(stats[i] + "_st").checked = st_proficiency[i];
             }
-
-            if (dex_mod < 0) {
-                document.getElementById("dex_base").value = dex_mod;
-            } else {
-                document.getElementById("dex_base").value = '+' + dex_mod;
-            }
-
-            if (con_mod < 0) {
-                document.getElementById("con_base").value = con_mod;
-            } else {
-                document.getElementById("con_base").value = '+' + con_mod;
-            }
-
-            if (int_mod < 0) {
-                document.getElementById("int_base").value = int_mod;
-            } else {
-                document.getElementById("int_base").value = '+' + int_mod;
-            }
-
-            if (wis_mod < 0) {
-                document.getElementById("wis_base").value = wis_mod;
-            } else {
-                document.getElementById("wis_base").value = '+' + wis_mod;
-            }
-
-            if (cha_mod < 0) {
-                document.getElementById("cha_base").value = cha_mod;
-            } else {
-                document.getElementById("cha_base").value = '+' + cha_mod;
-            }
-
-            document.getElementById("str_st").checked = loadedStats.STProficiency.Strength;
-            document.getElementById("dex_st").checked = loadedStats.STProficiency.Dexterity;
-            document.getElementById("con_st").checked = loadedStats.STProficiency.Constitution;
-            document.getElementById("int_st").checked = loadedStats.STProficiency.Intelligence;
-            document.getElementById("wis_st").checked = loadedStats.STProficiency.Wisdom;
-            document.getElementById("cha_st").checked = loadedStats.STProficiency.Charisma;
 
             updateStats();
         }

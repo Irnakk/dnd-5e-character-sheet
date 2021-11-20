@@ -13,10 +13,13 @@ body {
   border-left: 2px solid black;
   margin: 60px 0 0 0;
 }
-.txta {
+input {
   font-size: 35px;
   text-align: center;
   width: 60px;
+}
+input[readonly] {
+  cursor: default;
 }
 .cb {
   width: 20px;

@@ -10,10 +10,13 @@
   display: none !important;
 }
 a {
-  text-decoration: none;
+  text-decoration: underline;
   color: black;
   font-size: 13px;
   font-weight: bold;
+}
+a:hover {
+  color: red;
 }
 textarea {
   font-size: 12px;

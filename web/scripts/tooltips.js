@@ -1,9 +1,9 @@
 $(document).ready(function(){
-    $('.hover').mouseenter(function(e){
+    $('.hover').mouseenter(function () {
         let hint = $(this).attr('rel');
-        $('#hint').css({ 'left': e.clientX - 25, 'top': e.clientY - 50});
-        $('#hint').show().text(hint);
+        $('#hint').css({ 'left': $(this).offset().left, 'top': $(this).offset().top - 50});
+        $('#hint').fadeIn(200).text(hint);
     }).mouseout(function () {
-        $('#hint').hide();
+        $('#hint').fadeOut( 100 );
     });
 });

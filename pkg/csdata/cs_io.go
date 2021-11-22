@@ -8,9 +8,9 @@ import (
 
 	"database/sql"
 	"io/ioutil"
-
-	_ "github.com/lib/pq"
 )
+
+var DB *sql.DB
 
 // WriteFile marshals the sheet and saves the data into
 // a JSON file with a given name into the data/ folder.
@@ -86,21 +86,6 @@ func (sheet *CharacterSheet) ReadFromFile(name string) error {
 // for the given DB ID,
 // and saves the data into the Character Sheet.
 func (sheet *CharacterSheet) ReadFromDB(id int) error {
-	file_content, err := ioutil.ReadFile("C:/d5cs/db_login")
-	if err != nil {
-		log.Printf("Error in opening login file:\t%v\n", err)
-		return err
-	}
-
-	psqlconn := string(file_content)
-
-	db, err := sql.Open("postgres", psqlconn)
-	if err != nil {
-		log.Printf("Error in opening DB:\t%v\n", err)
-		return err
-	}
-	defer db.Close()
-
 	query := fmt.Sprintf(`
 	SELECT
 	"current_level",
@@ -123,9 +108,9 @@ func (sheet *CharacterSheet) ReadFromDB(id int) error {
 	FROM "sheets"
 	WHERE "sheet_id" = %d;`, id)
 
-	result := db.QueryRow(query)
+	result := DB.QueryRow(query)
 
-	err = result.Scan(
+	err := result.Scan(
 		&sheet.Level,
 
 		&sheet.StatsBase.Strength, &sheet.StatsBase.Dexterity, &sheet.StatsBase.Constitution,
@@ -167,21 +152,6 @@ func (sheet *CharacterSheet) ReadFromDB(id int) error {
 // Note: if the query does not find a row with
 // a given id, a new row will not be added.
 func (sheet *CharacterSheet) WriteToDB(id int) error {
-	file_content, err := ioutil.ReadFile("C:/d5cs/db_login")
-	if err != nil {
-		log.Printf("Error in opening login file:\t%v\n", err)
-		return err
-	}
-
-	psqlconn := string(file_content)
-
-	db, err := sql.Open("postgres", psqlconn)
-	if err != nil {
-		log.Printf("Error in opening DB:\t%v\n", err)
-		return err
-	}
-	defer db.Close()
-
 	query := `
 	UPDATE "sheets"
 	SET "current_level" = $1,
@@ -206,7 +176,7 @@ func (sheet *CharacterSheet) WriteToDB(id int) error {
 	`
 
 	// looks like it is a better way to perform a query with arguments
-	result, err := db.Exec(query,
+	result, err := DB.Exec(query,
 		sheet.Level,
 		sheet.StatsBase.Strength, sheet.StatsBase.Dexterity, sheet.StatsBase.Constitution,
 		sheet.StatsBase.Intelligence, sheet.StatsBase.Wisdom, sheet.StatsBase.Charisma,

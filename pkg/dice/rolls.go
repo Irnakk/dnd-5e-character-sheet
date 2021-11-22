@@ -2,7 +2,7 @@ package dice
 
 import (
 	"encoding/json"
-	"fmt"
+	"log"
 
 	"dnd-5e-character-sheet/pkg/csdata"
 )
@@ -20,7 +20,7 @@ type RollInfo struct {
 func MarshalRollSingle(number, value int) ([]byte, error) {
 	roll_result, err := DiceRoll(number, value)
 	if err != nil {
-		fmt.Printf("Error in rolling dice:\t%v\n", err)
+		log.Printf("Error in rolling dice:\t%v\n", err)
 		return []byte{}, err
 	}
 
@@ -32,7 +32,7 @@ func MarshalRollSingle(number, value int) ([]byte, error) {
 
 	marshaledResult, err := json.MarshalIndent(result_obj, "", "	")
 	if err != nil {
-		fmt.Printf("Error in marshalling response_object:\t%v\n", err)
+		log.Printf("Error in marshalling response_object:\t%v\n", err)
 		return []byte{}, err
 	}
 
@@ -47,7 +47,7 @@ func RollStats() (csdata.SixStats, error) {
 	for i := 0; i < 6; i++ {
 		roll, err := DiceRoll(4, 6)
 		if err != nil {
-			fmt.Printf("Error in rolling 4d6 on iteration %v:\t%v\n", i, err)
+			log.Printf("Error in rolling 4d6 on iteration %v:\t%v\n", i, err)
 			return csdata.SixStats{}, err
 		}
 

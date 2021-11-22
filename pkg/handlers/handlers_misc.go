@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"os"
 	"strconv"
@@ -16,10 +16,10 @@ import (
 //  * Request Method
 //  * Request URI
 func printRequestInfo(req *http.Request) {
-	fmt.Println("----------------")
-	fmt.Printf("req.Method:\t%v\n", req.Method)
-	fmt.Printf("req.RequestURI:\t%v\n", req.RequestURI)
-	fmt.Println("----------------")
+	log.Println("----------------")
+	log.Printf("req.Method:\t%v\n", req.Method)
+	log.Printf("req.RequestURI:\t%v\n", req.RequestURI)
+	log.Println("----------------")
 }
 
 // Function performs <Number> rolls of <Value>-sided dice.
@@ -36,8 +36,8 @@ func printRequestInfo(req *http.Request) {
 //
 // URI: /roll-result
 func RollResultHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("In rollResultHandler()")
-	defer fmt.Print("Out of rollResultHandler()\n\n****************\n\n")
+	log.Println("In rollResultHandler()")
+	defer log.Print("Out of rollResultHandler()\n\n****************\n\n")
 	printRequestInfo(req)
 
 	type rollInfo struct {
@@ -49,13 +49,13 @@ func RollResultHandler(w http.ResponseWriter, req *http.Request) {
 
 	err := json.NewDecoder(req.Body).Decode(&roll)
 	if err != nil {
-		fmt.Printf("Error in decoding request body:\t%v\n", err)
+		log.Printf("Error in decoding request body:\t%v\n", err)
 		return
 	}
 
 	response_data, err := dice.MarshalRollSingle(roll.Number, roll.Value)
 	if err != nil {
-		fmt.Printf("Could not marshal a roll:\t%v\n", err)
+		log.Printf("Could not marshal a roll:\t%v\n", err)
 		return
 	}
 
@@ -75,19 +75,19 @@ func RollResultHandler(w http.ResponseWriter, req *http.Request) {
 //
 // URI: /roll-stats
 func RollStatsHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("In RollStatsHandler()")
-	defer fmt.Print("Out of RollStatsHandler()\n\n****************\n\n")
+	log.Println("In RollStatsHandler()")
+	defer log.Print("Out of RollStatsHandler()\n\n****************\n\n")
 	printRequestInfo(req)
 
 	statsObj, err := dice.RollStats()
 	if err != nil {
-		fmt.Printf("Error in rolling stats:\t%v\n", err)
+		log.Printf("Error in rolling stats:\t%v\n", err)
 		return
 	}
 
 	response_data, err := json.MarshalIndent(statsObj, "", "	")
 	if err != nil {
-		fmt.Printf("Error in marshalling statsObj:\t%v\n", err)
+		log.Printf("Error in marshalling statsObj:\t%v\n", err)
 		return
 	}
 
@@ -108,8 +108,8 @@ func RollStatsHandler(w http.ResponseWriter, req *http.Request) {
 //
 // URI: /read-sheet
 func ReadSheetHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("In ReadSheetHandler()")
-	defer fmt.Print("Out of ReadSheetHandler()\n\n****************\n\n")
+	log.Println("In ReadSheetHandler()")
+	defer log.Print("Out of ReadSheetHandler()\n\n****************\n\n")
 	printRequestInfo(req)
 
 	var requestReply struct {
@@ -118,11 +118,11 @@ func ReadSheetHandler(w http.ResponseWriter, req *http.Request) {
 
 	err := json.NewDecoder(req.Body).Decode(&requestReply)
 	if err != nil {
-		fmt.Printf("Error in decoding sheet id:\t%v\n", err)
+		log.Printf("Error in decoding sheet id:\t%v\n", err)
 		return
 	}
 
-	fmt.Printf("Parsed id:\t%v\n", requestReply.Identifier)
+	log.Printf("Parsed id:\t%v\n", requestReply.Identifier)
 
 	var (
 		sheet     csdata.CharacterSheet
@@ -134,33 +134,33 @@ func ReadSheetHandler(w http.ResponseWriter, req *http.Request) {
 	// Otherwise (id is a number), we read the data from the
 	// correspodning DB row.
 	if id, err := strconv.Atoi(requestReply.Identifier); err != nil {
-		fmt.Printf("Error in parsing int in identifier <<%s>>:\t%v\n", requestReply.Identifier, err)
-		fmt.Printf("Trying to read data/%s.json\n", requestReply.Identifier)
+		log.Printf("Error in parsing int in identifier <<%s>>:\t%v\n", requestReply.Identifier, err)
+		log.Printf("Trying to read data/%s.json\n", requestReply.Identifier)
 
 		jsonFile, err := os.Open("data/" + requestReply.Identifier + ".json")
 		if err != nil {
-			fmt.Printf("Error in opening file:\t%v\n", err)
+			log.Printf("Error in opening file:\t%v\n", err)
 			return
 		}
 		defer jsonFile.Close()
 
 		byteValue, err = ioutil.ReadAll(jsonFile)
 		if err != nil {
-			fmt.Printf("Error in reading file:\t%v\n", err)
+			log.Printf("Error in reading file:\t%v\n", err)
 			return
 		}
 	} else {
-		fmt.Printf("Reading from DB, id=%d\n", id)
+		log.Printf("Reading from DB, id=%d\n", id)
 
 		err = sheet.ReadFromDB(id)
 		if err != nil {
-			fmt.Printf("Error in reading from DB, id=%d:\t%v\n", id, err)
+			log.Printf("Error in reading from DB, id=%d:\t%v\n", id, err)
 			return
 		}
 
 		byteValue, err = json.MarshalIndent(sheet, "", "	")
 		if err != nil {
-			fmt.Printf("Error in marshalling sheet:\t%v\n", err)
+			log.Printf("Error in marshalling sheet:\t%v\n", err)
 			return
 		}
 	}
@@ -182,8 +182,8 @@ func ReadSheetHandler(w http.ResponseWriter, req *http.Request) {
 //
 // URI: /write-stats
 func WriteStatsHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("In WriteStatsHandler()")
-	defer fmt.Print("Out of WriteStatsHandler()\n\n****************\n\n")
+	log.Println("In WriteStatsHandler()")
+	defer log.Print("Out of WriteStatsHandler()\n\n****************\n\n")
 	printRequestInfo(req)
 
 	var requestReply struct {
@@ -194,18 +194,18 @@ func WriteStatsHandler(w http.ResponseWriter, req *http.Request) {
 
 	err := json.NewDecoder(req.Body).Decode(&requestReply)
 	if err != nil {
-		fmt.Printf("Error in decoding stats info:\t%v\n", err)
+		log.Printf("Error in decoding stats info:\t%v\n", err)
 		return
 	}
 
-	fmt.Printf("~~~~~~~~~~~~~~~~\nrequestReply:\n%v\n~~~~~~~~~~~~~~~~\n", requestReply)
+	log.Printf("~~~~~~~~~~~~~~~~\nrequestReply:\n%v\n~~~~~~~~~~~~~~~~\n", requestReply)
 
-	fmt.Printf("Parsed id:\t%v\n", requestReply.Identifier)
+	log.Printf("Parsed id:\t%v\n", requestReply.Identifier)
 
 	var sheet csdata.CharacterSheet
 
 	if err = sheet.ReadFromFile(requestReply.Identifier); err == nil {
-		fmt.Printf("Read from file data/%s.json successfully!\n", requestReply.Identifier)
+		log.Printf("Read from file data/%s.json successfully!\n", requestReply.Identifier)
 	}
 
 	// Does not matter whether we could read the sheet from the file or not,
@@ -216,7 +216,7 @@ func WriteStatsHandler(w http.ResponseWriter, req *http.Request) {
 	sheet.Update()
 	err = sheet.WriteFile(requestReply.Identifier)
 	if err != nil {
-		fmt.Printf("Error in writing sheet to file:\t%v\n", err)
+		log.Printf("Error in writing sheet to file:\t%v\n", err)
 		return
 	}
 }
@@ -235,8 +235,8 @@ func WriteStatsHandler(w http.ResponseWriter, req *http.Request) {
 //
 // URI: /write-st
 func WriteSTHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("In WriteSTHandler()")
-	defer fmt.Print("Out of WriteSTHandler()\n\n****************\n\n")
+	log.Println("In WriteSTHandler()")
+	defer log.Print("Out of WriteSTHandler()\n\n****************\n\n")
 	printRequestInfo(req)
 
 	var requestReply struct {
@@ -246,18 +246,18 @@ func WriteSTHandler(w http.ResponseWriter, req *http.Request) {
 
 	err := json.NewDecoder(req.Body).Decode(&requestReply)
 	if err != nil {
-		fmt.Printf("Error in decoding saving throws info:\t%v\n", err)
+		log.Printf("Error in decoding saving throws info:\t%v\n", err)
 		return
 	}
 
-	fmt.Printf("~~~~~~~~~~~~~~~~\nrequestReply:\n%v\n~~~~~~~~~~~~~~~~\n", requestReply)
+	log.Printf("~~~~~~~~~~~~~~~~\nrequestReply:\n%v\n~~~~~~~~~~~~~~~~\n", requestReply)
 
-	fmt.Printf("Parsed id:\t%v\n", requestReply.Identifier)
+	log.Printf("Parsed id:\t%v\n", requestReply.Identifier)
 
 	var sheet csdata.CharacterSheet
 
 	if err = sheet.ReadFromFile(requestReply.Identifier); err == nil {
-		fmt.Printf("Read from file data/%s.json successfully!\n", requestReply.Identifier)
+		log.Printf("Read from file data/%s.json successfully!\n", requestReply.Identifier)
 	}
 
 	// Does not matter whether we could read the sheet from the file or not,
@@ -267,7 +267,7 @@ func WriteSTHandler(w http.ResponseWriter, req *http.Request) {
 	sheet.Update()
 	err = sheet.WriteFile(requestReply.Identifier)
 	if err != nil {
-		fmt.Printf("Error in writing sheet to file:\t%v\n", err)
+		log.Printf("Error in writing sheet to file:\t%v\n", err)
 		return
 	}
 }
@@ -285,8 +285,8 @@ func WriteSTHandler(w http.ResponseWriter, req *http.Request) {
 //
 // URI: /write-skills
 func WriteSkillsHandler(w http.ResponseWriter, req *http.Request) {
-	fmt.Println("In WriteSkillsHandler()")
-	defer fmt.Print("Out of WriteSkillsHandler()\n\n****************\n\n")
+	log.Println("In WriteSkillsHandler()")
+	defer log.Print("Out of WriteSkillsHandler()\n\n****************\n\n")
 	printRequestInfo(req)
 
 	var requestReply struct {
@@ -296,21 +296,21 @@ func WriteSkillsHandler(w http.ResponseWriter, req *http.Request) {
 
 	err := json.NewDecoder(req.Body).Decode(&requestReply)
 	if err != nil {
-		fmt.Printf("Error in decoding skills info:\t%v\n", err)
+		log.Printf("Error in decoding skills info:\t%v\n", err)
 		return
 	}
 
-	fmt.Printf("~~~~~~~~~~~~~~~~\nrequestReply:\n%v\n~~~~~~~~~~~~~~~~\n", requestReply)
+	log.Printf("~~~~~~~~~~~~~~~~\nrequestReply:\n%v\n~~~~~~~~~~~~~~~~\n", requestReply)
 
-	fmt.Printf("Parsed id:\t%v\n", requestReply.Identifier)
+	log.Printf("Parsed id:\t%v\n", requestReply.Identifier)
 
 	var sheet csdata.CharacterSheet
 
 	if err = sheet.ReadFromFile(requestReply.Identifier); err == nil {
-		fmt.Printf("Read from file data/%s.json successfully!\n", requestReply.Identifier)
+		log.Printf("Read from file data/%s.json successfully!\n", requestReply.Identifier)
 	}
 
-	fmt.Printf("CharacterSheet:\n%v\n", sheet)
+	log.Printf("CharacterSheet:\n%v\n", sheet)
 
 	// Does not matter whether we could read the sheet from the file or not,
 	// we still assign the new values to the fields
@@ -319,7 +319,7 @@ func WriteSkillsHandler(w http.ResponseWriter, req *http.Request) {
 	sheet.Update()
 	err = sheet.WriteFile(requestReply.Identifier)
 	if err != nil {
-		fmt.Printf("Error in writing sheet to file:\t%v\n", err)
+		log.Printf("Error in writing sheet to file:\t%v\n", err)
 		return
 	}
 }

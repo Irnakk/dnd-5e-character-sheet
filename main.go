@@ -1,27 +1,26 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"net/http"
 	"os"
-	"time"
 
 	"dnd-5e-character-sheet/pkg/handlers"
 )
 
 func main() {
-	fmt.Println("Starting func main()...")
-	fmt.Printf("at:\t%v\n", time.Now())
+	log.Println("Starting func main()...")
+
 	wd, err := os.Getwd()
 	if err != nil {
-		fmt.Printf("Error in getting current working directory:\t%v\n", err)
+		log.Printf("Error in getting current working directory:\t%v\n", err)
 	} else {
-		fmt.Printf("from:\t%v\n", wd)
+		log.Printf("from:\t%v\n", wd)
 	}
 
-	defer fmt.Printf("Finishing func main() at:\t%v\n", time.Now())
+	defer log.Println("Finishing func main()")
 
-	fmt.Println("Binding handler functions...")
+	log.Println("Binding handler functions...")
 	http.HandleFunc("/", handlers.RootHandler)
 	http.HandleFunc("/roll", handlers.RollHandler)
 	http.HandleFunc("/stats", handlers.StatsHandler)
@@ -45,6 +44,6 @@ func main() {
 	// http.HandleFunc("/reg-form", handlers.WriteSheetHandler)
 	// http.HandleFunc("/login-form", handlers.WriteSheetHandler)
 
-	fmt.Print("Listening on port 8080.\n\n")
+	log.Print("Listening on port 8080.\n\n")
 	http.ListenAndServe(":8080", nil)
 }

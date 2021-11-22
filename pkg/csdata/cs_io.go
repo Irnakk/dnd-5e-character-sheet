@@ -3,6 +3,7 @@ package csdata
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"os"
 
 	"database/sql"
@@ -16,25 +17,25 @@ import (
 func (sheet *CharacterSheet) WriteFile(name string) error {
 	marshaledResult, err := json.MarshalIndent(sheet, "", "	")
 	if err != nil {
-		fmt.Printf("Error in marshalling response_object:\t%v\n", err)
+		log.Printf("Error in marshalling response_object:\t%v\n", err)
 		return err
 	}
 
 	file, err := os.Create("data/" + name + ".json")
 	if err != nil {
-		fmt.Printf("Error in creating file:\t%v\n", err)
+		log.Printf("Error in creating file:\t%v\n", err)
 		return err
 	}
 
 	_, err = file.Write(marshaledResult)
 	if err != nil {
-		fmt.Printf("Error in writing to file:\t%v\n", err)
+		log.Printf("Error in writing to file:\t%v\n", err)
 		return err
 	}
 
 	err = file.Close()
 	if err != nil {
-		fmt.Printf("Error in closing file:\t%v\n", err)
+		log.Printf("Error in closing file:\t%v\n", err)
 		return err
 	}
 
@@ -47,30 +48,30 @@ func (sheet *CharacterSheet) WriteFile(name string) error {
 func (sheet *CharacterSheet) ReadFromFile(name string) error {
 	file_path := "data/" + name + ".json"
 
-	fmt.Printf("Checking if %s exists...\n", file_path)
+	log.Printf("Checking if %s exists...\n", file_path)
 
 	if _, err := os.Stat(file_path); err == nil {
-		fmt.Printf("File %s; reading data from file...\n", file_path)
+		log.Printf("File %s; reading data from file...\n", file_path)
 
 		jsonFile, err := os.Open(file_path)
 		if err != nil {
-			fmt.Printf("Error in opening file:\t%v\n", err)
+			log.Printf("Error in opening file:\t%v\n", err)
 			return err
 		}
 		defer jsonFile.Close()
 
 		byteValue, err := ioutil.ReadAll(jsonFile)
 		if err != nil {
-			fmt.Printf("Error in reading file:\t%v\n", err)
+			log.Printf("Error in reading file:\t%v\n", err)
 			return err
 		}
 
 		if err = json.Unmarshal(byteValue, &sheet); err != nil {
-			fmt.Printf("Error in unmarshaling json:\t%v\n", err)
+			log.Printf("Error in unmarshaling json:\t%v\n", err)
 			return err
 		}
 	} else {
-		fmt.Printf("File does not exist:\t%v\n", err)
+		log.Printf("File does not exist:\t%v\n", err)
 		return err
 	}
 
@@ -87,7 +88,7 @@ func (sheet *CharacterSheet) ReadFromFile(name string) error {
 func (sheet *CharacterSheet) ReadFromDB(id int) error {
 	file_content, err := ioutil.ReadFile("C:/d5cs/db_login")
 	if err != nil {
-		fmt.Printf("Error in opening login file:\t%v\n", err)
+		log.Printf("Error in opening login file:\t%v\n", err)
 		return err
 	}
 
@@ -95,7 +96,7 @@ func (sheet *CharacterSheet) ReadFromDB(id int) error {
 
 	db, err := sql.Open("postgres", psqlconn)
 	if err != nil {
-		fmt.Printf("Error in opening DB:\t%v\n", err)
+		log.Printf("Error in opening DB:\t%v\n", err)
 		return err
 	}
 	defer db.Close()
@@ -144,14 +145,14 @@ func (sheet *CharacterSheet) ReadFromDB(id int) error {
 		&sheet.SkillsProficiency.SleightOfHand, &sheet.SkillsProficiency.Stealth, &sheet.SkillsProficiency.Survival,
 	)
 	if err != nil {
-		fmt.Printf("Error in scanning:\t%v\n", err)
+		log.Printf("Error in scanning:\t%v\n", err)
 		return err
 	}
 
-	fmt.Printf("Query result:\n%v\n", sheet)
+	log.Printf("Query result:\n%v\n", sheet)
 
 	sheet.Update()
-	fmt.Printf("Sheet after Update():\n%v\n", sheet)
+	log.Printf("Sheet after Update():\n%v\n", sheet)
 
 	return nil
 }
@@ -168,7 +169,7 @@ func (sheet *CharacterSheet) ReadFromDB(id int) error {
 func (sheet *CharacterSheet) WriteToDB(id int) error {
 	file_content, err := ioutil.ReadFile("C:/d5cs/db_login")
 	if err != nil {
-		fmt.Printf("Error in opening login file:\t%v\n", err)
+		log.Printf("Error in opening login file:\t%v\n", err)
 		return err
 	}
 
@@ -176,7 +177,7 @@ func (sheet *CharacterSheet) WriteToDB(id int) error {
 
 	db, err := sql.Open("postgres", psqlconn)
 	if err != nil {
-		fmt.Printf("Error in opening DB:\t%v\n", err)
+		log.Printf("Error in opening DB:\t%v\n", err)
 		return err
 	}
 	defer db.Close()
@@ -225,18 +226,18 @@ func (sheet *CharacterSheet) WriteToDB(id int) error {
 
 		id)
 	if err != nil {
-		fmt.Printf("Error in updating DB:\t%v\n", err)
+		log.Printf("Error in updating DB:\t%v\n", err)
 		return err
 	}
 
 	n_rows, err := result.RowsAffected()
 	if err != nil {
-		fmt.Printf("Error in RowsAffected():\t%v\n", err)
+		log.Printf("Error in RowsAffected():\t%v\n", err)
 		return err
 	}
-	fmt.Printf("Number of affected rows:\t%v\n", n_rows)
+	log.Printf("Number of affected rows:\t%v\n", n_rows)
 	if n_rows == 0 {
-		fmt.Printf("No rows affected; could not find row with id=%d\n", id)
+		log.Printf("No rows affected; could not find row with id=%d\n", id)
 	}
 
 	return nil
